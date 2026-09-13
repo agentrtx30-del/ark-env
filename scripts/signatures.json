@@ -1,0 +1,71 @@
+{
+  "gworld": [
+    {
+      "name": "mov_rax_rip_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "disp_offset": 3,
+      "instr_len": 7,
+      "instr_match_offset": 0,
+      "note": "Generic mov rax, [rip+disp32]; ret getter. Too broad alone."
+    },
+    {
+      "name": "mov_rax_rip_test_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? 48 85 C0 74 ?? C3",
+      "disp_offset": 3,
+      "instr_len": 7,
+      "instr_match_offset": 0,
+      "note": "mov rax, [rip+disp32]; test rax,rax; jz; ret"
+    },
+    {
+      "name": "sub_rsp_mov_rax_ret",
+      "pattern": "48 83 EC 28 48 8B 05 ?? ?? ?? ?? 48 83 C4 28 C3",
+      "disp_offset": 7,
+      "instr_len": 7,
+      "instr_match_offset": 4,
+      "note": "sub rsp,0x28; mov rax,[rip+disp32]; add rsp,0x28; ret"
+    },
+    {
+      "name": "mov_rbx_home_mov_rax_ret",
+      "pattern": "48 89 5C 24 ?? 48 8B 05 ?? ?? ?? ?? C3",
+      "disp_offset": 8,
+      "instr_len": 7,
+      "instr_match_offset": 5,
+      "note": "mov [rsp+arg_home], rbx; mov rax,[rip+disp32]; ret"
+    }
+  ],
+
+  "engineGlobal": [
+    {
+      "name": "mov_rax_rip_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "disp_offset": 3,
+      "instr_len": 7,
+      "instr_match_offset": 0,
+      "note": "Generic mov rax, [rip+disp32]; ret getter. Too broad alone."
+    },
+    {
+      "name": "mov_rax_rip_test_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? 48 85 C0 74 ?? C3",
+      "disp_offset": 3,
+      "instr_len": 7,
+      "instr_match_offset": 0,
+      "note": "mov rax, [rip+disp32]; test rax,rax; jz; ret"
+    },
+    {
+      "name": "sub_rsp_mov_rax_ret",
+      "pattern": "48 83 EC 28 48 8B 05 ?? ?? ?? ?? 48 83 C4 28 C3",
+      "disp_offset": 7,
+      "instr_len": 7,
+      "instr_match_offset": 4,
+      "note": "sub rsp,0x28; mov rax,[rip+disp32]; add rsp,0x28; ret"
+    },
+    {
+      "name": "mov_rbx_home_mov_rax_ret",
+      "pattern": "48 89 5C 24 ?? 48 8B 05 ?? ?? ?? ?? C3",
+      "disp_offset": 8,
+      "instr_len": 7,
+      "instr_match_offset": 5,
+      "note": "mov [rsp+arg_home], rbx; mov rax,[rip+disp32]; ret"
+    }
+  ]
+}

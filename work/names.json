@@ -1,0 +1,52 @@
+{
+  "pid": 9740,
+  "process_window": {
+    "hwnd": 3148086,
+    "title": "MSCTFIME UI",
+    "class_name": "MSCTFIME UI"
+  },
+  "package_family_name": null,
+  "module": "ShooterGame.exe",
+  "module_base": "0x7ff74ca20000",
+  "gworld_var": "0x7ff750dc5758",
+  "world": "0x181329c5940",
+  "anchor": "0x1813a870010",
+  "chunk0Base": "0x1813a870000",
+  "poolObject": "0x1813a850000",
+  "dirFirst": "0x1813a86c000",
+  "blocksWalked": 9,
+  "tableSize": 13758,
+  "maxId": 140698833662358,
+  "gnamesGlobal": "0x7ff750dc26e0",
+  "rva": "0x43a26e0",
+  "poolObjectDelta": 255648,
+  "fnaNameTable": {
+    "module": "ShooterGame.exe",
+    "rva": "0x43a26e0"
+  },
+  "resolved": {
+    "0": "None",
+    "1": "ByteProperty",
+    "2": "IntProperty",
+    "3": "BoolProperty",
+    "4": "FloatProperty",
+    "5": "ObjectProperty",
+    "6": "NameProperty",
+    "217": "PersistentLevel",
+    "9096": "PrimalWorldSettings",
+    "9670": "ShooterGameState",
+    "11162": "TileStreamingVolume",
+    "11218": "InstancedFoliageActor",
+    "11235": "DirectionalLight",
+    "12854": "LevelStreamingKismet",
+    "13022": "MaterialParameterCollectionInstance",
+    "13375": "TrueSkySequenceActor",
+    "238923": null,
+    "239020": "DayCycleManager3",
+    "239972": "Global_PostProcess_Blueprint",
+    "240500": "Matinee_WeatherRain",
+    "241080": null,
+    "241298": null,
+    "241421": "WeatherGlobalOutdoorrFog"
+  }
+}

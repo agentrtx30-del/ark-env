@@ -1,0 +1,26 @@
+{
+  "expectedLevel": 225,
+  "pawnCountScanned": 29,
+  "componentOffsetCounts": {
+    "0xd10": 29
+  },
+  "levelOffsetCounts": {
+    "0x6cc": 1
+  },
+  "recommendedComponentOffset": "0xd10",
+  "recommendedLevelOffset": "0x6cc",
+  "samples": [
+    {
+      "pawn": "0x1ec02920000",
+      "componentOffset": "0xd10",
+      "component": "0x1eceb571240",
+      "objectName": "",
+      "levelMatches": [
+        {
+          "offset": "0x6cc",
+          "value": 225
+        }
+      ]
+    }
+  ]
+}

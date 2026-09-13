@@ -1,0 +1,102 @@
+{
+  "pid": 35388,
+  "process_window": {
+    "hwnd": 4131150,
+    "title": "MSCTFIME UI",
+    "class_name": "MSCTFIME UI"
+  },
+  "package_family_name": null,
+  "module": "ShooterGame.exe",
+  "module_base": "0x7ff74ca20000",
+  "gworld_var": "0x7ff750dc5758",
+  "world": "0x27af4d45940",
+  "worldDumpSize": 12288,
+  "candidateCount": 5,
+  "candidates": [
+    {
+      "where": "world",
+      "arrayOffset": "0x150",
+      "dataPointer": "0x27b8c147700",
+      "count": 103,
+      "capacity": 103,
+      "probeCount": 24,
+      "validProbe": 24,
+      "score": 2400103,
+      "sampleActors": [
+        "0x27b8c5fc000",
+        "0x27b8c5fc180",
+        "0x27b8c5fbe80",
+        "0x27b8c5fbb80",
+        "0x27b8c5fb880"
+      ]
+    },
+    {
+      "where": "world",
+      "arrayOffset": "0xa90",
+      "dataPointer": "0x27be01eb1f0",
+      "count": 87,
+      "capacity": 130,
+      "probeCount": 24,
+      "validProbe": 24,
+      "score": 2400087,
+      "sampleActors": [
+        "0x27a8a40b218",
+        "0x27adb982938",
+        "0x27ada3b7b58",
+        "0x27adaa24498",
+        "0x27adaa22938"
+      ]
+    },
+    {
+      "where": "world",
+      "arrayOffset": "0x278",
+      "dataPointer": "0x27ad6911600",
+      "count": 75,
+      "capacity": 82,
+      "probeCount": 24,
+      "validProbe": 24,
+      "score": 2400075,
+      "sampleActors": [
+        "0x27be033e580",
+        "0x27a9044d8c0",
+        "0x27a8fe71540",
+        "0x27af56c5fa0",
+        "0x27a9047f460"
+      ]
+    },
+    {
+      "where": "world",
+      "arrayOffset": "0x298",
+      "dataPointer": "0x27b8c0f27c0",
+      "count": 22,
+      "capacity": 22,
+      "probeCount": 22,
+      "validProbe": 22,
+      "score": 2200022,
+      "sampleActors": [
+        "0x27ba37d8300",
+        "0x27ba37d8200",
+        "0x27ba37d7700",
+        "0x27ba37d7600",
+        "0x27ba37d7400"
+      ]
+    },
+    {
+      "where": "world",
+      "arrayOffset": "0x268",
+      "dataPointer": "0x27bed5b7680",
+      "count": 21,
+      "capacity": 42,
+      "probeCount": 21,
+      "validProbe": 21,
+      "score": 2100021,
+      "sampleActors": [
+        "0x27a81770a80",
+        "0x27ba404a800",
+        "0x27a81777000",
+        "0x27bd0ca5b00",
+        "0x27bd0ca3f00"
+      ]
+    }
+  ]
+}

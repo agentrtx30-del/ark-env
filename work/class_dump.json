@@ -1,0 +1,739 @@
+{
+  "tableSize": 13754,
+  "actorCount": 1157,
+  "classCounts": {
+    "PrimalWorldSettings": 1,
+    "DirectionalLight": 1,
+    "SkyLight": 1,
+    "Class_239973": 1,
+    "DynamicCaptureManager": 1,
+    "CameraActor": 1,
+    "WindDirectionalSource": 1,
+    "MatineeActorManager": 1,
+    "StaticMeshActor": 2,
+    "DayCycleAmbientSound": 3,
+    "TrueSkySequenceActor": 1,
+    "TileStreamingVolume": 50,
+    "PostProcessVolume": 86,
+    "ExponentialHeightFog": 9,
+    "Class_240507": 1,
+    "PlayerStart": 216,
+    "PhysicsVolume": 2,
+    "Class_238815": 1,
+    "StructurePreventionZoneVolume": 83,
+    "AtmosphericFog": 1,
+    "DamageVolumeSwamp": 1,
+    "Class_241041": 12,
+    "BiomeZoneVolume": 9,
+    "TogglePainVolume": 27,
+    "SkeletalMeshActor": 1,
+    "BlockingVolume": 5,
+    "NPCZoneVolume": 7,
+    "NPCZoneSpawnVolume": 7,
+    "Class_240644": 21,
+    "Note": 1,
+    "Class_241222": 1,
+    "Class_238783": 1,
+    "Class_238785": 1,
+    "Class_238787": 1,
+    "Class_239640": 1,
+    "Class_241039": 1,
+    "Class_238820": 1,
+    "PainCausingVolume": 5,
+    "DefaultPhysicsVolume": 1,
+    "Class_237131": 1,
+    "HibernationManager": 1,
+    "ShooterGameSession": 1,
+    "ParticleEventManager": 1,
+    "GameNetworkManager": 1,
+    "MatineeActor": 7,
+    "DayCycleManager": 1,
+    "InstancedFoliageActor": 1,
+    "Class_241337": 1,
+    "Class_241331": 1,
+    "Class_241335": 1,
+    "Class_241333": 1,
+    "Class_241298": 1,
+    "ShooterGameState": 1,
+    "Class_115791": 3,
+    "Class_133483": 3,
+    "Class_159051": 294,
+    "Class_235848": 1,
+    "ShooterPlayerState": 1,
+    "Class_236849": 1,
+    "Class_235846": 1,
+    "Class_236510": 1,
+    "Class_166006": 56,
+    "Class_208456": 3,
+    "Class_93907": 2,
+    "Class_192150": 1,
+    "Class_86518": 56,
+    "Class_208450": 3,
+    "Class_93900": 2,
+    "Class_192143": 1,
+    "Class_159035": 16,
+    "Class_247319": 1,
+    "Class_247315": 1,
+    "Class_247344": 1,
+    "Class_247295": 5,
+    "Class_247345": 5,
+    "Class_235697": 24,
+    "Class_236867": 5,
+    "Class_235436": 24,
+    "Class_247303": 6,
+    "Class_247338": 6,
+    "Class_247361": 6,
+    "Class_247299": 9,
+    "Class_247336": 9,
+    "Class_247359": 9,
+    "Class_247307": 3,
+    "Class_247340": 3,
+    "Class_247363": 3,
+    "Class_247311": 1,
+    "Class_247342": 1,
+    "Class_247365": 1,
+    "Class_94242": 1
+  },
+  "superProbe": [
+    {
+      "offset": "0x30",
+      "ok": 8,
+      "chains": {
+        "0x1813dcdde40": [
+          "PrimalWorldSettings",
+          "WorldSettings"
+        ],
+        "0x1813dcca100": [
+          "DirectionalLight",
+          "Light"
+        ],
+        "0x1813dccb0c0": [
+          "SkyLight",
+          "Info"
+        ],
+        "0x181da7eda00": [
+          null,
+          "PostProcessVolume"
+        ],
+        "0x1813dccc780": [
+          "DynamicCaptureManager",
+          "Actor"
+        ],
+        "0x1813dccd900": [
+          "CameraActor",
+          "Actor"
+        ]
+      }
+    },
+    {
+      "offset": "0x40",
+      "ok": 4,
+      "chains": {
+        "0x1813dcca100": [
+          "DirectionalLight",
+          "None"
+        ],
+        "0x1813dccb0c0": [
+          "SkyLight",
+          "None"
+        ],
+        "0x1813dccaf00": [
+          "WindDirectionalSource",
+          "None"
+        ],
+        "0x1813dccb280": [
+          "MatineeActorManager",
+          "None"
+        ]
+      }
+    },
+    {
+      "offset": "0x68",
+      "ok": 3,
+      "chains": {
+        "0x1813dcca100": [
+          "DirectionalLight",
+          "LightComponent"
+        ],
+        "0x1813dccb0c0": [
+          "SkyLight",
+          "LightComponent"
+        ],
+        "0x1813dccd900": [
+          "CameraActor",
+          "CameraComponent"
+        ]
+      }
+    }
+  ],
+  "samples": [
+    {
+      "i": 0,
+      "actor": "0x181d1e6d520",
+      "name": "PrimalWorldSettings",
+      "class": "PrimalWorldSettings",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 1,
+      "actor": "0x181d52d0000",
+      "name": "DirectionalLight",
+      "class": "DirectionalLight",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 2,
+      "actor": "0x181da87f660",
+      "name": "Unknown_241080",
+      "class": "SkyLight",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 3,
+      "actor": "0x1810d6e6d80",
+      "name": "Unknown_239972",
+      "class": "Class_239973",
+      "root": "0x181d3ad9000",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 4,
+      "actor": "0x18133c0f240",
+      "name": "Unknown_239648",
+      "class": "DynamicCaptureManager",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 5,
+      "actor": "0x181d3ad8800",
+      "name": "Unknown_241214",
+      "class": "CameraActor",
+      "root": "0x181d3aeaf50",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 6,
+      "actor": "0x181ce3cbfa0",
+      "name": "WindDirectionalSource",
+      "class": "WindDirectionalSource",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 7,
+      "actor": "0x181d386aa00",
+      "name": "MatineeActorManager",
+      "class": "MatineeActorManager",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 8,
+      "actor": "0x181da87bb10",
+      "name": "Unknown_239498",
+      "class": "StaticMeshActor",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 9,
+      "actor": "0x181d52d5a50",
+      "name": "DayCycleAmbientSound",
+      "class": "DayCycleAmbientSound",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 10,
+      "actor": "0x181d52d0ff0",
+      "name": "DayCycleAmbientSound",
+      "class": "DayCycleAmbientSound",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 11,
+      "actor": "0x181d52d5500",
+      "name": "TrueSkySequenceActor",
+      "class": "TrueSkySequenceActor",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 12,
+      "actor": "0x181d3c61540",
+      "name": "Unknown_238923",
+      "class": "TileStreamingVolume",
+      "root": "0x181d5058800",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 13,
+      "actor": "0x181d3c61a90",
+      "name": "Unknown_238923",
+      "class": "TileStreamingVolume",
+      "root": "0x181d5058000",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 14,
+      "actor": "0x181d3c61fe0",
+      "name": "Unknown_238923",
+      "class": "TileStreamingVolume",
+      "root": "0x181d5057800",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 15,
+      "actor": "0x181d3c62530",
+      "name": "Unknown_238923",
+      "class": "TileStreamingVolume",
+      "root": "0x181d5057000",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 16,
+      "actor": "0x181d3ae3520",
+      "name": "TileStreamingVolume",
+      "class": "TileStreamingVolume",
+      "root": "0x181d39b1800",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 17,
+      "actor": "0x18110a4d1e0",
+      "name": "Unknown_238922",
+      "class": "PostProcessVolume",
+      "root": "0x181d5059000",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 18,
+      "actor": "0x181d3d4f660",
+      "name": "Unknown_238919",
+      "class": "ExponentialHeightFog",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 19,
+      "actor": "0x181d3d4faf0",
+      "name": "Unknown_241421",
+      "class": "ExponentialHeightFog",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 20,
+      "actor": "0x18110a4e420",
+      "name": "Unknown_238916",
+      "class": "PostProcessVolume",
+      "root": "0x181d505c000",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 21,
+      "actor": "0x181da873230",
+      "name": "Unknown_238924",
+      "class": "ExponentialHeightFog",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 22,
+      "actor": "0x181d3ae7f80",
+      "name": "TileStreamingVolume",
+      "class": "TileStreamingVolume",
+      "root": "0x181d3b7f000",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 23,
+      "actor": "0x181d3ae7a30",
+      "name": "TileStreamingVolume",
+      "class": "TileStreamingVolume",
+      "root": "0x181d3b7f800",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 24,
+      "actor": "0x181d3c63fc0",
+      "name": "Unknown_238931",
+      "class": "TileStreamingVolume",
+      "root": "0x181d5054800",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 25,
+      "actor": "0x181da874470",
+      "name": "Unknown_240505",
+      "class": "Class_240507",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 26,
+      "actor": "0x181d3888f70",
+      "name": "Unknown_240723",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 27,
+      "actor": "0x181cbe794c0",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 28,
+      "actor": "0x181d38884d0",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 29,
+      "actor": "0x181d3887f80",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 30,
+      "actor": "0x181d3887a30",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 31,
+      "actor": "0x181d38874e0",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 32,
+      "actor": "0x181d3886f90",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 33,
+      "actor": "0x181d38864f0",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 34,
+      "actor": "0x181d3885fa0",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 35,
+      "actor": "0x181d3885a50",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 36,
+      "actor": "0x181d3885500",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 37,
+      "actor": "0x181d3884fb0",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 38,
+      "actor": "0x181d3884a60",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 39,
+      "actor": "0x181d3884510",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 40,
+      "actor": "0x181d3883fc0",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 41,
+      "actor": "0x181d3883a70",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 42,
+      "actor": "0x181d3883520",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 43,
+      "actor": "0x181d3882a80",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 44,
+      "actor": "0x181d3882530",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 45,
+      "actor": "0x181d3881fe0",
+      "name": "PlayerStart",
+      "class": "PlayerStart",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 46,
+      "actor": "0x18118a8b680",
+      "name": "PostProcessVolume",
+      "class": "PostProcessVolume",
+      "root": "0x181d3aa3000",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 47,
+      "actor": "0x181da87db00",
+      "name": "Unknown_238932",
+      "class": "ExponentialHeightFog",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 48,
+      "actor": "0x181d3c60aa0",
+      "name": "Unknown_238917",
+      "class": "TileStreamingVolume",
+      "root": "0x181d505a000",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 49,
+      "actor": "0x181d3ae8f70",
+      "name": "TileStreamingVolume",
+      "class": "TileStreamingVolume",
+      "root": "0x181d3b7d800",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 50,
+      "actor": "0x181da87faf0",
+      "name": "Unknown_238937",
+      "class": "ExponentialHeightFog",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 51,
+      "actor": "0x18118a87fc0",
+      "name": "PostProcessVolume",
+      "class": "PostProcessVolume",
+      "root": "0x181d3aa1800",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 52,
+      "actor": "0x18118a8a440",
+      "name": "PostProcessVolume",
+      "class": "PostProcessVolume",
+      "root": "0x181d3aa2800",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 53,
+      "actor": "0x18203cae8b0",
+      "name": "Unknown_238940",
+      "class": "ExponentialHeightFog",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 54,
+      "actor": "0x181d3c60ff0",
+      "name": "Unknown_238918",
+      "class": "TileStreamingVolume",
+      "root": "0x181d5059800",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 55,
+      "actor": "0x181d3c64a60",
+      "name": "Unknown_238941",
+      "class": "PhysicsVolume",
+      "root": "0x181d5052800",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 56,
+      "actor": "0x18118a8c8c0",
+      "name": "PostProcessVolume",
+      "class": "PostProcessVolume",
+      "root": "0x181d3aa3800",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 57,
+      "actor": "0x181da87f1d0",
+      "name": "Unknown_238944",
+      "class": "ExponentialHeightFog",
+      "root": null,
+      "loc": null
+    },
+    {
+      "i": 58,
+      "actor": "0x181d3c64fb0",
+      "name": "Unknown_238942",
+      "class": "PhysicsVolume",
+      "root": "0x181d5052000",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "i": 59,
+      "actor": "0x181d3c65500",
+      "name": "Unknown_238947",
+      "class": "TileStreamingVolume",
+      "root": "0x181d5051000",
+      "loc": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ]
+}

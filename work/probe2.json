@@ -1,0 +1,15 @@
+{
+  "tableSize": 4066,
+  "blocksWalked": 12,
+  "controller": null,
+  "playerState": null,
+  "controllerPlayerStateOffset": null,
+  "playerStateStrings": [],
+  "ownPawn": null,
+  "capsuleCheck": {},
+  "cameraPosition": [
+    0.0,
+    0.0,
+    0.0
+  ]
+}

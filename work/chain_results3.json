@@ -1,0 +1,588 @@
+{
+  "engine": "0x153c1ef76a0",
+  "used_resolution": [
+    1200,
+    900
+  ],
+  "window": null,
+  "result_count": 10,
+  "results": [
+    {
+      "score": 240,
+      "gameInstanceOffset": "0x5f48",
+      "localPlayersOffset": "0xf0",
+      "localPlayer": "0x153cfc4f800",
+      "viewportClientOffset": "0x208",
+      "viewportClient": "0x154d015b000",
+      "vc_vtable": "0x153f70f8100",
+      "engine_anchor_offset": null,
+      "gi_anchor_offset": null,
+      "resolution_exact_direct": [],
+      "resolution_exact_via_slot": [
+        {
+          "slot": "0x20",
+          "off": "0x38"
+        },
+        {
+          "slot": "0x20",
+          "off": "0x48"
+        },
+        {
+          "slot": "0x20",
+          "off": "0x58"
+        },
+        {
+          "slot": "0x20",
+          "off": "0x820"
+        },
+        {
+          "slot": "0x120",
+          "off": "0x38"
+        },
+        {
+          "slot": "0x120",
+          "off": "0x48"
+        },
+        {
+          "slot": "0x120",
+          "off": "0x58"
+        },
+        {
+          "slot": "0x120",
+          "off": "0x820"
+        }
+      ],
+      "resolution_plausible_direct": [
+        {
+          "off": "0x240",
+          "w": 454,
+          "h": 566
+        },
+        {
+          "off": "0x1940",
+          "w": 345,
+          "h": 459
+        },
+        {
+          "off": "0x2540",
+          "w": 575,
+          "h": 689
+        },
+        {
+          "off": "0x3a40",
+          "w": 804,
+          "h": 917
+        }
+      ],
+      "resolution_plausible_via_slot": [
+        {
+          "slot": "0x0",
+          "off": "0xa40",
+          "w": 804,
+          "h": 917
+        },
+        {
+          "slot": "0x0",
+          "off": "0xe40",
+          "w": 690,
+          "h": 803
+        },
+        {
+          "slot": "0x0",
+          "off": "0x1740",
+          "w": 690,
+          "h": 803
+        }
+      ]
+    },
+    {
+      "score": 120,
+      "gameInstanceOffset": "0x5f48",
+      "localPlayersOffset": "0x160",
+      "localPlayer": "0x153cfc4f760",
+      "viewportClientOffset": "0x340",
+      "viewportClient": "0x153dc2f6200",
+      "vc_vtable": "0x154ce257100",
+      "engine_anchor_offset": null,
+      "gi_anchor_offset": null,
+      "resolution_exact_direct": [],
+      "resolution_exact_via_slot": [
+        {
+          "slot": "0x20",
+          "off": "0x38"
+        },
+        {
+          "slot": "0x20",
+          "off": "0x48"
+        },
+        {
+          "slot": "0x20",
+          "off": "0x58"
+        },
+        {
+          "slot": "0x20",
+          "off": "0x820"
+        }
+      ],
+      "resolution_plausible_direct": [],
+      "resolution_plausible_via_slot": [
+        {
+          "slot": "0x0",
+          "off": "0x1c40",
+          "w": 345,
+          "h": 459
+        }
+      ]
+    },
+    {
+      "score": 60,
+      "gameInstanceOffset": "0x5ce8",
+      "localPlayersOffset": "0x320",
+      "localPlayer": "0x153cfc4f800",
+      "viewportClientOffset": "0x2a8",
+      "viewportClient": "0x153cb056a00",
+      "vc_vtable": "0x154cf183600",
+      "engine_anchor_offset": null,
+      "gi_anchor_offset": null,
+      "resolution_exact_direct": [],
+      "resolution_exact_via_slot": [
+        {
+          "slot": "0x18",
+          "off": "0x7e8"
+        },
+        {
+          "slot": "0x18",
+          "off": "0x828"
+        }
+      ],
+      "resolution_plausible_direct": [
+        {
+          "off": "0xa40",
+          "w": 345,
+          "h": 459
+        }
+      ],
+      "resolution_plausible_via_slot": [
+        {
+          "slot": "0x18",
+          "off": "0x1f28",
+          "w": 1026,
+          "h": 900
+        }
+      ]
+    },
+    {
+      "score": 60,
+      "gameInstanceOffset": "0x5f48",
+      "localPlayersOffset": "0x160",
+      "localPlayer": "0x153cfc4f760",
+      "viewportClientOffset": "0x348",
+      "viewportClient": "0x154d04d7d00",
+      "vc_vtable": "0x154cffb8200",
+      "engine_anchor_offset": null,
+      "gi_anchor_offset": null,
+      "resolution_exact_direct": [],
+      "resolution_exact_via_slot": [
+        {
+          "slot": "0x18",
+          "off": "0x7e8"
+        },
+        {
+          "slot": "0x18",
+          "off": "0x828"
+        }
+      ],
+      "resolution_plausible_direct": [
+        {
+          "off": "0x1940",
+          "w": 460,
+          "h": 574
+        }
+      ],
+      "resolution_plausible_via_slot": [
+        {
+          "slot": "0x0",
+          "off": "0x140",
+          "w": 804,
+          "h": 917
+        },
+        {
+          "slot": "0x0",
+          "off": "0xa40",
+          "w": 804,
+          "h": 917
+        },
+        {
+          "slot": "0x0",
+          "off": "0x1040",
+          "w": 690,
+          "h": 803
+        },
+        {
+          "slot": "0x0",
+          "off": "0x1c40",
+          "w": 690,
+          "h": 803
+        }
+      ]
+    },
+    {
+      "score": 40,
+      "gameInstanceOffset": "0x5ce8",
+      "localPlayersOffset": "0x320",
+      "localPlayer": "0x153cfc4f800",
+      "viewportClientOffset": "0x208",
+      "viewportClient": "0x154d015b000",
+      "vc_vtable": "0x153f70f8100",
+      "engine_anchor_offset": null,
+      "gi_anchor_offset": null,
+      "resolution_exact_direct": [
+        "0x191c"
+      ],
+      "resolution_exact_via_slot": [],
+      "resolution_plausible_direct": [
+        {
+          "off": "0x140",
+          "w": 345,
+          "h": 459
+        },
+        {
+          "off": "0x240",
+          "w": 454,
+          "h": 566
+        },
+        {
+          "off": "0x1740",
+          "w": 460,
+          "h": 574
+        },
+        {
+          "off": "0x1c40",
+          "w": 804,
+          "h": 917
+        },
+        {
+          "off": "0x1e40",
+          "w": 345,
+          "h": 459
+        }
+      ],
+      "resolution_plausible_via_slot": [
+        {
+          "slot": "0x0",
+          "off": "0x640",
+          "w": 460,
+          "h": 574
+        },
+        {
+          "slot": "0x0",
+          "off": "0x840",
+          "w": 690,
+          "h": 803
+        },
+        {
+          "slot": "0x0",
+          "off": "0xa40",
+          "w": 804,
+          "h": 917
+        },
+        {
+          "slot": "0x0",
+          "off": "0x1740",
+          "w": 460,
+          "h": 574
+        }
+      ]
+    },
+    {
+      "score": 30,
+      "gameInstanceOffset": "0x5ce8",
+      "localPlayersOffset": "0x320",
+      "localPlayer": "0x153cfc4f800",
+      "viewportClientOffset": "0x168",
+      "viewportClient": "0x153ce639950",
+      "vc_vtable": "0x153c1e8cb80",
+      "engine_anchor_offset": null,
+      "gi_anchor_offset": null,
+      "resolution_exact_direct": [],
+      "resolution_exact_via_slot": [
+        {
+          "slot": "0x130",
+          "off": "0x12b8"
+        }
+      ],
+      "resolution_plausible_direct": [
+        {
+          "off": "0x1660",
+          "w": 768,
+          "h": 256
+        },
+        {
+          "off": "0x1718",
+          "w": 512,
+          "h": 257
+        },
+        {
+          "off": "0x1998",
+          "w": 512,
+          "h": 257
+        },
+        {
+          "off": "0x1a00",
+          "w": 512,
+          "h": 257
+        },
+        {
+          "off": "0x1a80",
+          "w": 432,
+          "h": 3329
+        },
+        {
+          "off": "0x1d10",
+          "w": 768,
+          "h": 256
+        }
+      ],
+      "resolution_plausible_via_slot": [
+        {
+          "slot": "0xd0",
+          "off": "0x158",
+          "w": 3072,
+          "h": 514
+        }
+      ]
+    },
+    {
+      "score": 30,
+      "gameInstanceOffset": "0x5ce8",
+      "localPlayersOffset": "0x390",
+      "localPlayer": "0x153cfc4f760",
+      "viewportClientOffset": "0x208",
+      "viewportClient": "0x153ce639950",
+      "vc_vtable": "0x153c1e8cb80",
+      "engine_anchor_offset": null,
+      "gi_anchor_offset": null,
+      "resolution_exact_direct": [],
+      "resolution_exact_via_slot": [
+        {
+          "slot": "0x130",
+          "off": "0x12b8"
+        }
+      ],
+      "resolution_plausible_direct": [
+        {
+          "off": "0x1660",
+          "w": 768,
+          "h": 256
+        },
+        {
+          "off": "0x1718",
+          "w": 512,
+          "h": 257
+        },
+        {
+          "off": "0x1998",
+          "w": 512,
+          "h": 257
+        },
+        {
+          "off": "0x1a00",
+          "w": 512,
+          "h": 257
+        },
+        {
+          "off": "0x1a80",
+          "w": 432,
+          "h": 3329
+        },
+        {
+          "off": "0x1d10",
+          "w": 768,
+          "h": 256
+        }
+      ],
+      "resolution_plausible_via_slot": [
+        {
+          "slot": "0xd0",
+          "off": "0x158",
+          "w": 3072,
+          "h": 514
+        }
+      ]
+    },
+    {
+      "score": 30,
+      "gameInstanceOffset": "0x5f48",
+      "localPlayersOffset": "0xf0",
+      "localPlayer": "0x153cfc4f800",
+      "viewportClientOffset": "0x168",
+      "viewportClient": "0x153ce639950",
+      "vc_vtable": "0x153c1e8cb80",
+      "engine_anchor_offset": null,
+      "gi_anchor_offset": null,
+      "resolution_exact_direct": [],
+      "resolution_exact_via_slot": [
+        {
+          "slot": "0x130",
+          "off": "0x12b8"
+        }
+      ],
+      "resolution_plausible_direct": [
+        {
+          "off": "0x1660",
+          "w": 768,
+          "h": 256
+        },
+        {
+          "off": "0x1718",
+          "w": 512,
+          "h": 257
+        },
+        {
+          "off": "0x1998",
+          "w": 512,
+          "h": 257
+        },
+        {
+          "off": "0x1a00",
+          "w": 512,
+          "h": 257
+        },
+        {
+          "off": "0x1a80",
+          "w": 432,
+          "h": 3329
+        },
+        {
+          "off": "0x1d10",
+          "w": 768,
+          "h": 256
+        }
+      ],
+      "resolution_plausible_via_slot": [
+        {
+          "slot": "0xd0",
+          "off": "0x158",
+          "w": 3072,
+          "h": 514
+        }
+      ]
+    },
+    {
+      "score": 30,
+      "gameInstanceOffset": "0x5f48",
+      "localPlayersOffset": "0xf0",
+      "localPlayer": "0x153cfc4f800",
+      "viewportClientOffset": "0x2a8",
+      "viewportClient": "0x154ce4fd900",
+      "vc_vtable": "0x153dc2e4500",
+      "engine_anchor_offset": null,
+      "gi_anchor_offset": null,
+      "resolution_exact_direct": [],
+      "resolution_exact_via_slot": [
+        {
+          "slot": "0x100",
+          "off": "0x328"
+        }
+      ],
+      "resolution_plausible_direct": [
+        {
+          "off": "0x110",
+          "w": 1791,
+          "h": 256
+        },
+        {
+          "off": "0xf40",
+          "w": 345,
+          "h": 459
+        },
+        {
+          "off": "0x1440",
+          "w": 575,
+          "h": 689
+        },
+        {
+          "off": "0x1540",
+          "w": 460,
+          "h": 574
+        },
+        {
+          "off": "0x1d40",
+          "w": 341,
+          "h": 453
+        },
+        {
+          "off": "0x2878",
+          "w": 2561,
+          "h": 2816
+        }
+      ],
+      "resolution_plausible_via_slot": [
+        {
+          "slot": "0x20",
+          "off": "0x13d8",
+          "w": 3072,
+          "h": 256
+        }
+      ]
+    },
+    {
+      "score": 30,
+      "gameInstanceOffset": "0x5f48",
+      "localPlayersOffset": "0x160",
+      "localPlayer": "0x153cfc4f760",
+      "viewportClientOffset": "0x208",
+      "viewportClient": "0x153ce639950",
+      "vc_vtable": "0x153c1e8cb80",
+      "engine_anchor_offset": null,
+      "gi_anchor_offset": null,
+      "resolution_exact_direct": [],
+      "resolution_exact_via_slot": [
+        {
+          "slot": "0x130",
+          "off": "0x12b8"
+        }
+      ],
+      "resolution_plausible_direct": [
+        {
+          "off": "0x1660",
+          "w": 768,
+          "h": 256
+        },
+        {
+          "off": "0x1718",
+          "w": 512,
+          "h": 257
+        },
+        {
+          "off": "0x1998",
+          "w": 512,
+          "h": 257
+        },
+        {
+          "off": "0x1a00",
+          "w": 512,
+          "h": 257
+        },
+        {
+          "off": "0x1a80",
+          "w": 432,
+          "h": 3329
+        },
+        {
+          "off": "0x1d10",
+          "w": 768,
+          "h": 256
+        }
+      ],
+      "resolution_plausible_via_slot": [
+        {
+          "slot": "0xd0",
+          "off": "0x158",
+          "w": 3072,
+          "h": 514
+        }
+      ]
+    }
+  ]
+}

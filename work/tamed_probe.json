@@ -1,0 +1,784 @@
+{
+  "tamedPtr": "0x222953d0000",
+  "wildPtrs": [
+    "0x2220ca6db60",
+    "0x22211b2db60",
+    "0x2235ec02490",
+    "0x2221220d520"
+  ],
+  "ownerPointerCandidates": [],
+  "pawnCandidates": [
+    {
+      "kind": "int_diff",
+      "offset": "0x244",
+      "tamed": 1087424226,
+      "wild": [
+        1087420754,
+        1087420754,
+        1087420754,
+        1087420754
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x464",
+      "tamed": 547,
+      "wild": [
+        546,
+        546,
+        546,
+        546
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x51c",
+      "tamed": 547,
+      "wild": [
+        546,
+        546,
+        546,
+        546
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x728",
+      "tamed": 84300800,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x72c",
+      "tamed": 1087424647,
+      "wild": [
+        -1064353792,
+        -1064353792,
+        -1064353792,
+        -1064353792
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x7a8",
+      "tamed": 65536,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x7e8",
+      "tamed": 1069547520,
+      "wild": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1065353216
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x7f4",
+      "tamed": 547,
+      "wild": [
+        546,
+        546,
+        546,
+        546
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0xa1c",
+      "tamed": 547,
+      "wild": [
+        546,
+        546,
+        546,
+        546
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0xc2c",
+      "tamed": 547,
+      "wild": [
+        546,
+        546,
+        546,
+        546
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0xd24",
+      "tamed": 547,
+      "wild": [
+        546,
+        546,
+        546,
+        546
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0xd48",
+      "tamed": 1124859904,
+      "wild": [
+        1116471296,
+        1116471296,
+        1116471296,
+        1116471296
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0xda4",
+      "tamed": 547,
+      "wild": [
+        546,
+        546,
+        546,
+        546
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0xf5c",
+      "tamed": 1087429118,
+      "wild": [
+        -1064353792,
+        -1064353792,
+        -1064353792,
+        -1064353792
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0xf64",
+      "tamed": 1087429182,
+      "wild": [
+        -1064353792,
+        -1064353792,
+        -1064353792,
+        -1064353792
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x10fc",
+      "tamed": 1084227584,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x1128",
+      "tamed": 84300800,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x112c",
+      "tamed": 1087424647,
+      "wild": [
+        -1064353792,
+        -1064353792,
+        -1064353792,
+        -1064353792
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x128c",
+      "tamed": 1210130944,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "team_id",
+      "offset": "0x148c",
+      "tamed": 546,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "team_id",
+      "offset": "0x1490",
+      "tamed": 2,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "team_id",
+      "offset": "0x1494",
+      "tamed": 4,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "team_id",
+      "offset": "0x1498",
+      "tamed": 3,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "team_id",
+      "offset": "0x14b0",
+      "tamed": 2,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "team_id",
+      "offset": "0x14b4",
+      "tamed": 128,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "bool_tamed",
+      "offset": "0x14c0",
+      "tamed": 1,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "bool_tamed",
+      "offset": "0x14d0",
+      "tamed": 1,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x14e8",
+      "tamed": 1108082688,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x1818",
+      "tamed": 1690712064,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x181c",
+      "tamed": 1087428999,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "team_id",
+      "offset": "0x18fc",
+      "tamed": 546,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "team_id",
+      "offset": "0x191c",
+      "tamed": 546,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "team_id",
+      "offset": "0x192c",
+      "tamed": 546,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x1a90",
+      "tamed": 435567616,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x1a94",
+      "tamed": 1087424243,
+      "wild": [
+        -1064353792,
+        -1064353792,
+        -1064353792,
+        -1064353792
+      ]
+    },
+    {
+      "kind": "team_id",
+      "offset": "0x1ba8",
+      "tamed": 150,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x1cdc",
+      "tamed": 1087424226,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x1cec",
+      "tamed": 1087429056,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "team_id",
+      "offset": "0x2030",
+      "tamed": 12,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "team_id",
+      "offset": "0x2034",
+      "tamed": 32,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x2100",
+      "tamed": 1210202112,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x29c8",
+      "tamed": 65536,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x2acc",
+      "tamed": 50334213,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x2ad0",
+      "tamed": 50334726,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "team_id",
+      "offset": "0x2ad8",
+      "tamed": 12,
+      "wild": [
+        0,
+        -1,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "team_id",
+      "offset": "0x2b78",
+      "tamed": 10,
+      "wild": [
+        0,
+        -1,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "team_id",
+      "offset": "0x2c0c",
+      "tamed": 9,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x2c3c",
+      "tamed": 1313297231,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "team_id",
+      "offset": "0x2c98",
+      "tamed": 3,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x2cf8",
+      "tamed": 16779370,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x2cfc",
+      "tamed": 67108953,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x2d40",
+      "tamed": 1073152,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "team_id",
+      "offset": "0x2d5c",
+      "tamed": 2,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "team_id",
+      "offset": "0x2dcc",
+      "tamed": 21845,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x2dd4",
+      "tamed": 1077248,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x2ed8",
+      "tamed": 1055014,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x2f64",
+      "tamed": 2130758,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x2f70",
+      "tamed": 1049158,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x2f78",
+      "tamed": 167772210,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x2f7c",
+      "tamed": 1048690,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "statusCandidates": [
+    {
+      "kind": "int_diff",
+      "offset": "0xfc",
+      "tamed": 1067030938,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x83c",
+      "tamed": 1067030938,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x89c",
+      "tamed": 1067030938,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x8c8",
+      "tamed": 1075545374,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x8cc",
+      "tamed": 1067030938,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x928",
+      "tamed": 1075545374,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0x92c",
+      "tamed": 1067030938,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0xa08",
+      "tamed": 1087495168,
+      "wild": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0xa0c",
+      "tamed": 1087424622,
+      "wild": [
+        -1064353792,
+        -1064353792,
+        -1064353792,
+        -1064353792
+      ]
+    },
+    {
+      "kind": "int_diff",
+      "offset": "0xb28",
+      "tamed": 1067030938,
+      "wild": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1065353216
+      ]
+    }
+  ]
+}

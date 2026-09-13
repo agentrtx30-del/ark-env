@@ -1,0 +1,47 @@
+{
+  "camera": [
+    -106392.625,
+    211552.9375,
+    -14287.8544921875
+  ],
+  "tableSize": 14668,
+  "counts": {
+    "player": 1
+  },
+  "count": 1,
+  "structural_lock": {
+    "ownPawn": "0x2a565e52490",
+    "controller": "0x2a41c6a2aa0",
+    "playerState": "0x2a41602b000",
+    "localPlayerControllerOffset": null
+  },
+  "missing": [
+    "localPlayerControllerOffset"
+  ],
+  "discovery": {},
+  "playerStateNameCandidates": {},
+  "targets": [
+    {
+      "ptr": "0x2a565e52490",
+      "worldX": -106392.625,
+      "worldY": 211552.9375,
+      "worldZ": -14287.8544921875,
+      "halfHeight": 86.0,
+      "health": 100.0,
+      "maxHealth": 100.0,
+      "name": "PluralCell8379",
+      "isPlayer": true,
+      "classLabel": "player",
+      "classKind": "player",
+      "distance": 0.0,
+      "classChain": [
+        "id_115791",
+        "id_115787",
+        "id_115785",
+        "ShooterCharacter",
+        "id_7949",
+        "id_7950"
+      ]
+    }
+  ]
+}

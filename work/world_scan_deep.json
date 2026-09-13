@@ -1,0 +1,407 @@
+{
+  "pid": 35388,
+  "process_window": {
+    "hwnd": 4131150,
+    "title": "MSCTFIME UI",
+    "class_name": "MSCTFIME UI"
+  },
+  "package_family_name": null,
+  "module": "ShooterGame.exe",
+  "module_base": "0x7ff74ca20000",
+  "gworld_var": "0x7ff750dc5758",
+  "world": "0x27af4d45940",
+  "worldDumpSize": 12288,
+  "candidateCount": 22,
+  "candidates": [
+    {
+      "where": "world+0x2d0->child",
+      "arrayOffset": "0x1bd0",
+      "dataPointer": "0x27bbac50000",
+      "count": 2981,
+      "capacity": 3034,
+      "probeCount": 24,
+      "validProbe": 24,
+      "score": 2402981,
+      "sampleActors": [
+        "0x27bcea617a0",
+        "0x27bcea61420",
+        "0x27bcea61260",
+        "0x27bcea610a0",
+        "0x27bcea60ee0"
+      ],
+      "childOffset": "0x2d0"
+    },
+    {
+      "where": "world+0x2d0->child",
+      "arrayOffset": "0x1580",
+      "dataPointer": "0x27bea8c5550",
+      "count": 2021,
+      "capacity": 2194,
+      "probeCount": 24,
+      "validProbe": 24,
+      "score": 2402021,
+      "sampleActors": [
+        "0x27bd5dfea00",
+        "0x27bd5dfe7c0",
+        "0x27bd5dfe580",
+        "0x27bd5dfe340",
+        "0x27bd5dfe100"
+      ],
+      "childOffset": "0x2d0"
+    },
+    {
+      "where": "world+0xf8->child",
+      "arrayOffset": "0x88",
+      "dataPointer": "0x27be5840000",
+      "count": 1104,
+      "capacity": 1239,
+      "probeCount": 24,
+      "validProbe": 24,
+      "score": 2401104,
+      "sampleActors": [
+        "0x27a8ff2d520",
+        "0x27a83a56f90",
+        "0x27a98fbf1d0",
+        "0x27a8a40ad60",
+        "0x27af5f8f240"
+      ],
+      "childOffset": "0xf8"
+    },
+    {
+      "where": "world+0x2d0->child",
+      "arrayOffset": "0x19b0",
+      "dataPointer": "0x27b8d18b2f0",
+      "count": 729,
+      "capacity": 816,
+      "probeCount": 24,
+      "validProbe": 24,
+      "score": 2400729,
+      "sampleActors": [
+        "0x27bd5dfea00",
+        "0x27bd5dfe7c0",
+        "0x27bd5dfe580",
+        "0x27bd5dfe340",
+        "0x27bd5dfe100"
+      ],
+      "childOffset": "0x2d0"
+    },
+    {
+      "where": "world+0x248->child",
+      "arrayOffset": "0x4e0",
+      "dataPointer": "0x27babdd9200",
+      "count": 216,
+      "capacity": 286,
+      "probeCount": 24,
+      "validProbe": 24,
+      "score": 2400216,
+      "sampleActors": [
+        "0x27a8fe384d0",
+        "0x27a8a3d94c0",
+        "0x27a8fe37a30",
+        "0x27a8fe374e0",
+        "0x27a8fe36f90"
+      ],
+      "childOffset": "0x248"
+    },
+    {
+      "where": "world",
+      "arrayOffset": "0x150",
+      "dataPointer": "0x27b8c147700",
+      "count": 103,
+      "capacity": 103,
+      "probeCount": 24,
+      "validProbe": 24,
+      "score": 2400103,
+      "sampleActors": [
+        "0x27b8c5fc000",
+        "0x27b8c5fc180",
+        "0x27b8c5fbe80",
+        "0x27b8c5fbb80",
+        "0x27b8c5fb880"
+      ]
+    },
+    {
+      "where": "world",
+      "arrayOffset": "0xa90",
+      "dataPointer": "0x27be01eb1f0",
+      "count": 87,
+      "capacity": 130,
+      "probeCount": 24,
+      "validProbe": 24,
+      "score": 2400087,
+      "sampleActors": [
+        "0x27a8a40b218",
+        "0x27adb982938",
+        "0x27ada3b7b58",
+        "0x27adaa24498",
+        "0x27adaa22938"
+      ]
+    },
+    {
+      "where": "world",
+      "arrayOffset": "0x278",
+      "dataPointer": "0x27ad6911600",
+      "count": 61,
+      "capacity": 82,
+      "probeCount": 24,
+      "validProbe": 24,
+      "score": 2400061,
+      "sampleActors": [
+        "0x27be033e580",
+        "0x27a9044d8c0",
+        "0x27a8fe71540",
+        "0x27af56c5fa0",
+        "0x27a9047f460"
+      ]
+    },
+    {
+      "where": "world+0x2d0->child",
+      "arrayOffset": "0x16b8",
+      "dataPointer": "0x27bedab8700",
+      "count": 36,
+      "capacity": 47,
+      "probeCount": 24,
+      "validProbe": 24,
+      "score": 2400036,
+      "sampleActors": [
+        "0x27bd6daeb00",
+        "0x27bd5868520",
+        "0x27bd6dae880",
+        "0x27bd01d2ac0",
+        "0x27bd6dae740"
+      ],
+      "childOffset": "0x2d0"
+    },
+    {
+      "where": "world",
+      "arrayOffset": "0x298",
+      "dataPointer": "0x27b8c0f27c0",
+      "count": 22,
+      "capacity": 22,
+      "probeCount": 22,
+      "validProbe": 22,
+      "score": 2200022,
+      "sampleActors": [
+        "0x27ba37d8300",
+        "0x27ba37d8200",
+        "0x27ba37d7700",
+        "0x27ba37d7600",
+        "0x27ba37d7400"
+      ]
+    },
+    {
+      "where": "world",
+      "arrayOffset": "0x268",
+      "dataPointer": "0x27bed5b7680",
+      "count": 21,
+      "capacity": 42,
+      "probeCount": 21,
+      "validProbe": 21,
+      "score": 2100021,
+      "sampleActors": [
+        "0x27a81770a80",
+        "0x27ba404a800",
+        "0x27a81777000",
+        "0x27bd0ca5b00",
+        "0x27bd0ca3f00"
+      ]
+    },
+    {
+      "where": "world+0x2d0->child",
+      "arrayOffset": "0x17a8",
+      "dataPointer": "0x27baa929900",
+      "count": 18,
+      "capacity": 22,
+      "probeCount": 18,
+      "validProbe": 18,
+      "score": 1800018,
+      "sampleActors": [
+        "0x27bbaec4400",
+        "0x27bbaec4800",
+        "0x27bbaec4c00",
+        "0x27bbaec5800",
+        "0x27bbaec5000"
+      ],
+      "childOffset": "0x2d0"
+    },
+    {
+      "where": "world+0x2d0->child",
+      "arrayOffset": "0x1c30",
+      "dataPointer": "0x27bba157000",
+      "count": 55,
+      "capacity": 82,
+      "probeCount": 24,
+      "validProbe": 16,
+      "score": 1600055,
+      "sampleActors": [
+        "0x27b8c5f0780",
+        "0x27bd7a30000",
+        "0x27ba41ffc00",
+        "0x27b95bdf800",
+        "0x27bd6b78700"
+      ],
+      "childOffset": "0x2d0"
+    },
+    {
+      "where": "world+0x110->child",
+      "arrayOffset": "0x38f0",
+      "dataPointer": "0x27b00000000",
+      "count": 1552,
+      "capacity": 8606,
+      "probeCount": 24,
+      "validProbe": 15,
+      "score": 1501552,
+      "sampleActors": [
+        "0x27b00000000",
+        "0x27b00000300",
+        "0x27b00000c80",
+        "0x27b00001500",
+        "0x27b00001d80"
+      ],
+      "childOffset": "0x110"
+    },
+    {
+      "where": "world+0x2d0->child",
+      "arrayOffset": "0x60",
+      "dataPointer": "0x27bf4d7c000",
+      "count": 88,
+      "capacity": 130,
+      "probeCount": 24,
+      "validProbe": 15,
+      "score": 1500088,
+      "sampleActors": [
+        "0x27b8a0448c0",
+        "0x27bd7a2d480",
+        "0x27bd744ea88",
+        "0x27a89727500",
+        "0x27a8a7b64a0"
+      ],
+      "childOffset": "0x2d0"
+    },
+    {
+      "where": "world+0x290->child",
+      "arrayOffset": "0x2f8",
+      "dataPointer": "0x27a90f56fc0",
+      "count": 24,
+      "capacity": 24,
+      "probeCount": 24,
+      "validProbe": 13,
+      "score": 1300024,
+      "sampleActors": [
+        "0x27a818557c0",
+        "0x27a82e25780",
+        "0x27a87fc4a00",
+        "0x27a8df80000",
+        "0x27a81854800"
+      ],
+      "childOffset": "0x290"
+    },
+    {
+      "where": "world+0x2d0->child",
+      "arrayOffset": "0x210",
+      "dataPointer": "0x27be48c0000",
+      "count": 927,
+      "capacity": 1139,
+      "probeCount": 24,
+      "validProbe": 12,
+      "score": 1200927,
+      "sampleActors": [
+        "0x27bd3656d60",
+        "0x27bcea615e0",
+        "0x27bd75bd200",
+        "0x27a8b6355c0",
+        "0x27bcf969c40"
+      ],
+      "childOffset": "0x2d0"
+    },
+    {
+      "where": "world+0x2d0->child",
+      "arrayOffset": "0x2700",
+      "dataPointer": "0x27bb168d740",
+      "count": 271,
+      "capacity": 704,
+      "probeCount": 24,
+      "validProbe": 12,
+      "score": 1200271,
+      "sampleActors": [
+        "0x27bd6e00000",
+        "0x27a89cc1f60",
+        "0x27bd6e00300",
+        "0x27a89cc1f60",
+        "0x27bd6e00f00"
+      ],
+      "childOffset": "0x2d0"
+    },
+    {
+      "where": "world+0x2d0->child",
+      "arrayOffset": "0x2a0",
+      "dataPointer": "0x27be1e4a000",
+      "count": 32,
+      "capacity": 47,
+      "probeCount": 24,
+      "validProbe": 12,
+      "score": 1200032,
+      "sampleActors": [
+        "0x27bd36528d0",
+        "0x27bd78e6c80",
+        "0x27bd75bd200",
+        "0x27bab052d80",
+        "0x27ba38276c0"
+      ],
+      "childOffset": "0x2d0"
+    },
+    {
+      "where": "world+0x188->child",
+      "arrayOffset": "0x3aa0",
+      "dataPointer": "0x27be5927aa0",
+      "count": 18,
+      "capacity": 18,
+      "probeCount": 18,
+      "validProbe": 9,
+      "score": 900018,
+      "sampleActors": [
+        "0x27be01c8d00",
+        "0x27be01c8e00",
+        "0x27be5927980",
+        "0x27be01c8f00",
+        "0x27be5a5bde0"
+      ],
+      "childOffset": "0x188"
+    },
+    {
+      "where": "world",
+      "arrayOffset": "0x7c0",
+      "dataPointer": "0x27beb475280",
+      "count": 17,
+      "capacity": 22,
+      "probeCount": 17,
+      "validProbe": 9,
+      "score": 900017,
+      "sampleActors": [
+        "0x27a9234b680",
+        "0x27ad1a56d80",
+        "0x27a9126b680",
+        "0x27b829ddb00",
+        "0x27a92344900"
+      ]
+    },
+    {
+      "where": "world+0x188->child",
+      "arrayOffset": "0x3b00",
+      "dataPointer": "0x27be5926f60",
+      "count": 17,
+      "capacity": 17,
+      "probeCount": 17,
+      "validProbe": 9,
+      "score": 900017,
+      "sampleActors": [
+        "0x27be01cc000",
+        "0x27be5a5d2e0",
+        "0x27be01cc300",
+        "0x27be5a5d3c0",
+        "0x27be5a5d4a0"
+      ],
+      "childOffset": "0x188"
+    }
+  ]
+}

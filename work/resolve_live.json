@@ -1,0 +1,24 @@
+{
+  "process_pid": 11084,
+  "process_window": {
+    "hwnd": 1704442,
+    "title": "MSCTFIME UI",
+    "class_name": "MSCTFIME UI"
+  },
+  "package_family_name": null,
+  "module": "ShooterGame.exe",
+  "module_base": "0x7ff651e50000",
+  "gworld_var": "0x7ff6561f5758",
+  "world": "0x229d8633fc0",
+  "world_valid": true,
+  "engineGlobal_var": "0x7ff6561de270",
+  "engine": "0x229dfaf76a0",
+  "engine_valid": true,
+  "gameInstance": "0x229df9a90d0",
+  "gameInstance_valid": true,
+  "localPlayersArray": "0x229df9a91c0",
+  "localPlayersData": "0x22a7281f700",
+  "localPlayersCount": 1,
+  "localPlayer": "0x22a7281f720",
+  "viewportClient": "0xe55a1"
+}

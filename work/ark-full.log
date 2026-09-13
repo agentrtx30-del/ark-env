@@ -1,0 +1,219 @@
+[2026-09-05 13:06:44.298] [info] ark-full starting
+[2026-09-05 13:06:44.311] [info] found ARK pid=11084
+[2026-09-05 13:06:44.311] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 13:06:44.314] [info] self-check complete: targets=32
+[2026-09-05 13:08:30.675] [info] ark-full starting
+[2026-09-05 13:08:30.687] [info] found ARK pid=11084
+[2026-09-05 13:08:30.687] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 13:08:30.687] [warn] game window not found yet; waiting...
+[2026-09-05 13:08:32.709] [info] found ARK pid=11084
+[2026-09-05 13:08:32.709] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 13:08:32.709] [warn] game window not found yet; waiting...
+[2026-09-05 13:08:34.725] [info] found ARK pid=11084
+[2026-09-05 13:08:34.735] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 13:08:34.735] [warn] game window not found yet; waiting...
+[2026-09-05 13:08:36.760] [info] found ARK pid=11084
+[2026-09-05 13:08:36.760] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 13:08:36.760] [warn] game window not found yet; waiting...
+[2026-09-05 13:08:38.788] [info] found ARK pid=11084
+[2026-09-05 13:08:38.788] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 13:08:38.790] [warn] game window not found yet; waiting...
+[2026-09-05 13:08:40.811] [info] found ARK pid=11084
+[2026-09-05 13:08:40.813] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 13:08:40.813] [warn] game window not found yet; waiting...
+[2026-09-05 13:08:42.825] [info] found ARK pid=11084
+[2026-09-05 13:08:42.825] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 13:08:42.825] [warn] game window not found yet; waiting...
+[2026-09-05 13:08:44.851] [info] found ARK pid=11084
+[2026-09-05 13:08:44.851] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 13:08:44.852] [warn] game window not found yet; waiting...
+[2026-09-05 13:21:31.352] [info] ark-full starting
+[2026-09-05 13:21:31.364] [info] found ARK pid=11084
+[2026-09-05 13:21:31.364] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 13:21:31.372] [info] self-check complete: first=32 pawnLike=1 cam=0
+[2026-09-05 13:22:22.629] [info] ark-full starting
+[2026-09-05 13:22:22.640] [info] found ARK pid=11084
+[2026-09-05 13:22:22.641] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 13:22:39.787] [info] detached
+[2026-09-05 13:24:16.988] [info] ark-full starting
+[2026-09-05 13:24:16.998] [info] found ARK pid=11084
+[2026-09-05 13:24:17.000] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 13:25:09.788] [info] detached
+[2026-09-05 13:39:20.356] [info] ark-full starting
+[2026-09-05 13:39:20.357] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 13:39:20.367] [info] found ARK pid=11084
+[2026-09-05 13:39:20.367] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 13:39:20.373] [info] self-check complete: first=32 pawnLike=16 cam=0
+[2026-09-05 13:50:31.023] [info] ark-full starting
+[2026-09-05 13:50:31.024] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 13:50:31.034] [info] found ARK pid=11084
+[2026-09-05 13:50:31.034] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 13:50:31.053] [info] self-check complete: first=32 pawnLike=4 cam=0
+[2026-09-05 14:25:47.897] [info] ark-full starting
+[2026-09-05 14:25:47.897] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 14:25:47.910] [info] found ARK pid=11084
+[2026-09-05 14:25:47.910] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 14:25:47.935] [info] self-check complete: first=32 pawnLike=4 cam=0
+[2026-09-05 14:26:40.544] [info] ark-full starting
+[2026-09-05 14:26:40.544] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 14:26:40.554] [info] found ARK pid=11084
+[2026-09-05 14:26:40.555] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 14:26:40.576] [info] self-check complete: first=32 pawnLike=4 cam=1
+[2026-09-05 14:36:06.874] [info] ark-full starting
+[2026-09-05 14:36:06.874] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 14:36:06.886] [info] found ARK pid=11084
+[2026-09-05 14:36:06.886] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 14:36:06.906] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:07.079] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:07.402] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:08.421] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:08.591] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:08.884] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:09.101] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:09.253] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:09.825] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:09.936] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:10.058] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:10.180] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:10.548] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:10.660] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:10.832] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:10.956] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:11.854] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:12.026] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:12.137] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:12.436] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:13.055] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:13.238] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:13.438] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:13.687] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:13.888] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:14.322] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:14.868] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:15.237] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:15.420] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:16.025] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:16.288] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:16.702] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:17.941] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:18.541] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:18.726] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:19.822] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:20.185] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 14:36:53.879] [info] ark-full starting
+[2026-09-05 14:36:53.880] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 14:36:53.891] [info] found ARK pid=11084
+[2026-09-05 14:36:53.891] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 14:36:53.912] [info] self-check complete: first=32 pawnLike=4 cam=0
+[2026-09-05 14:52:08.374] [info] ark-full starting
+[2026-09-05 14:52:08.374] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 14:52:08.384] [info] found ARK pid=11084
+[2026-09-05 14:52:08.385] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 14:52:08.399] [info] self-check complete: first=32 pawnLike=4 cam=1
+[2026-09-05 15:00:52.427] [info] ark-full starting
+[2026-09-05 15:00:52.427] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 15:00:52.439] [info] found ARK pid=11084
+[2026-09-05 15:00:52.439] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 15:12:50.846] [info] ark-full starting
+[2026-09-05 15:12:50.846] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 15:12:50.858] [info] found ARK pid=11084
+[2026-09-05 15:12:50.859] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 15:30:18.462] [info] ark-full starting
+[2026-09-05 15:30:18.462] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 15:30:18.473] [info] found ARK pid=11084
+[2026-09-05 15:30:18.473] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 15:37:55.350] [info] ark-full starting
+[2026-09-05 15:37:55.350] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 15:37:55.361] [info] found ARK pid=11084
+[2026-09-05 15:37:55.361] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 15:38:08.762] [info] name table: 0 entries (fallback mode)
+[2026-09-05 15:38:22.532] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 15:51:01.756] [info] ark-full starting
+[2026-09-05 15:51:01.756] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 15:51:01.768] [info] found ARK pid=11084
+[2026-09-05 15:51:01.769] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 15:51:01.867] [info] name table: 0 entries (fallback mode)
+[2026-09-05 15:51:14.185] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 16:02:15.152] [info] ark-full starting
+[2026-09-05 16:02:15.152] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 16:02:15.163] [info] found ARK pid=11084
+[2026-09-05 16:02:15.165] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 16:02:15.174] [info] name table: 14668 entries (ok)
+[2026-09-05 16:02:15.189] [warn] classifier found nothing; switching to capsule fallback
+[2026-09-05 16:19:18.356] [info] ark-full starting
+[2026-09-05 16:19:18.356] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 16:19:18.367] [info] found ARK pid=11084
+[2026-09-05 16:19:18.369] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 16:19:18.378] [info] name table: 14668 entries (ok)
+[2026-09-05 16:19:18.395] [warn] classifier found nothing; switching to capsule fallback
+[2026-09-05 16:22:42.874] [info] ark-full starting
+[2026-09-05 16:22:42.874] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 16:22:42.887] [info] found ARK pid=34160
+[2026-09-05 16:22:42.888] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 16:22:42.906] [info] name table: 13754 entries (ok)
+[2026-09-05 16:22:42.922] [warn] classifier found nothing; switching to capsule fallback
+[2026-09-05 16:30:29.554] [info] ark-full starting
+[2026-09-05 16:30:29.554] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 16:30:29.571] [info] name table: 13754 entries (ok)
+[2026-09-05 16:30:29.590] [info] found ARK pid=34160
+[2026-09-05 16:30:29.590] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 16:30:29.595] [info] self-check complete: pawnLike=32 cam=1
+[2026-09-05 16:31:57.159] [info] ark-full starting
+[2026-09-05 16:31:57.159] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 16:31:57.168] [info] name table: 13754 entries (ok)
+[2026-09-05 16:31:57.180] [info] found ARK pid=34160
+[2026-09-05 16:31:57.180] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 16:31:57.714] [warn] classifier found nothing after 3 rebuilds; switching to structural fallback
+[2026-09-05 16:52:04.762] [info] ark-full starting
+[2026-09-05 16:52:04.762] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 16:52:04.772] [info] name table: 13754 entries (ok)
+[2026-09-05 16:52:04.784] [info] found ARK pid=34160
+[2026-09-05 16:52:04.784] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 16:52:04.789] [info] self-check complete: pawnLike=32 cam=1
+[2026-09-05 16:52:33.696] [info] ark-full starting
+[2026-09-05 16:52:33.696] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 16:52:33.706] [info] name table: 13754 entries (ok)
+[2026-09-05 16:52:33.719] [info] found ARK pid=34160
+[2026-09-05 16:52:33.719] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 16:52:35.800] [warn] camera read failing (count=1); overlay hidden
+[2026-09-05 16:53:25.451] [info] world pointer changed; clearing caches
+[2026-09-05 17:39:47.917] [info] ark-full starting
+[2026-09-05 17:39:47.917] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 17:39:47.927] [info] name table: 13754 entries (ok)
+[2026-09-05 17:39:47.939] [info] found ARK pid=17272
+[2026-09-05 17:39:47.939] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 17:39:47.944] [info] self-check complete: pawnLike=32 cam=1
+[2026-09-05 17:41:24.078] [info] ark-full starting
+[2026-09-05 17:41:24.078] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 17:41:24.087] [info] name table: 13754 entries (ok)
+[2026-09-05 17:41:24.100] [info] found ARK pid=17272
+[2026-09-05 17:41:24.100] [info] attach success: base=0x00007FF651E50000
+[2026-09-05 17:51:40.988] [info] ark-full starting
+[2026-09-05 17:51:40.988] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 17:51:40.998] [info] name table: 13754 entries (ok)
+[2026-09-05 17:51:41.007] [info] found ARK pid=17272
+[2026-09-05 17:51:41.009] [info] attach success: base=0x00007FF651E50000
+[2026-09-13 00:27:13.277] [info] ark-full starting
+[2026-09-13 00:27:13.277] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-13 00:27:13.291] [info] name table: 13754 entries (ok)
+[2026-09-13 00:28:43.303] [info] ark-full starting
+[2026-09-13 00:28:43.303] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-13 00:28:43.313] [info] name table: 13754 entries (ok)
+[2026-09-13 00:28:43.323] [info] found ARK pid=23632
+[2026-09-13 00:28:43.323] [info] attach success: base=0x00007FF7E18B0000
+[2026-09-13 00:34:45.264] [info] ark-full starting (lock-on tracker v2)
+[2026-09-13 00:34:45.264] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-13 00:34:45.274] [info] name table: 13754 entries (ok)
+[2026-09-13 00:34:45.280] [info] found ARK pid=23632
+[2026-09-13 00:34:45.280] [info] attach success: base=0x00007FF7E18B0000
+[2026-09-13 00:47:40.327] [info] ark-full starting (lock-on tracker v3)
+[2026-09-13 00:47:40.327] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-13 00:47:40.342] [info] name table: 13754 entries (ok)
+[2026-09-13 00:47:40.352] [info] found ARK pid=23632
+[2026-09-13 00:47:40.352] [info] attach success: base=0x00007FF7E18B0000
+[2026-09-13 00:48:37.077] [info] detached
+[2026-09-13 01:31:21.367] [info] ark-full starting (lock-on tracker v4)
+[2026-09-13 01:31:21.367] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-13 01:31:21.379] [info] name table: 13754 entries (ok)
+[2026-09-13 01:31:21.379] [info] found ARK pid=23632
+[2026-09-13 01:31:21.379] [info] attach success: base=0x00007FF7E18B0000

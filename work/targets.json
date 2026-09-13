@@ -1,0 +1,32 @@
+{
+  "camera": [
+    39845.0,
+    43790.0,
+    -2241.015625
+  ],
+  "counts": {
+    "player": 1
+  },
+  "count": 1,
+  "structural_lock": {
+    "ownPawn": "0x1e0f5655a50",
+    "controller": "0x1e0f5657a30",
+    "playerState": "0x1e0ee1c4620"
+  },
+  "targets": [
+    {
+      "ptr": "0x1e0f5655a50",
+      "label": "player",
+      "loc": [
+        39845.0,
+        43790.0,
+        -2241.015625
+      ],
+      "distance": 0.0,
+      "capsuleHalfHeight": 0.0,
+      "capsuleRadius": 0.0,
+      "health": 0.0,
+      "maxHealth": 0.0
+    }
+  ]
+}

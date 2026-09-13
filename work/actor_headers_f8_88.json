@@ -1,0 +1,479 @@
+{
+  "pid": 35388,
+  "process_window": {
+    "hwnd": 4131150,
+    "title": "MSCTFIME UI",
+    "class_name": "MSCTFIME UI"
+  },
+  "package_family_name": null,
+  "module": "ShooterGame.exe",
+  "module_base": "0x7ff74ca20000",
+  "gworld_var": "0x7ff750dc5758",
+  "world": "0x27af4d45940",
+  "childOffset": "0xf8",
+  "child": "0x27a81770a80",
+  "arrayAddress": "0x27a81770b08",
+  "arrayOffset": "0x88",
+  "dataPointer": "0x27be5840000",
+  "count": 1068,
+  "capacity": 1239,
+  "actorsRead": 24,
+  "actors": [
+    {
+      "index": 0,
+      "actor": "0x27a8ff2d520",
+      "headerHex": "08 b6 b4 50 f7 7f 00 00 08 00 28 00 60 89 0d 00 40 de 6c 82 7a 02 00 00 88 23 00 00 00 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 07 00 00 00 8e 01 00 00 54 cd 10 00 54 cd 10 00",
+      "guesses": {
+        "flags_0x00": 1354020360,
+        "name_0x04": 32759,
+        "class_0x08": "0xd896000280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 9096,
+        "class_0x10": "0x27a826cde40",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 1,
+      "actor": "0x27a83a56f90",
+      "headerHex": "30 a9 c7 50 f7 7f 00 00 08 00 28 00 6a f6 00 00 00 a1 6b 82 7a 02 00 00 e3 2b 00 00 00 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355262256,
+        "name_0x04": 32759,
+        "class_0x08": "0xf66a00280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 11235,
+        "class_0x10": "0x27a826ba100",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 2,
+      "actor": "0x27a98fbf1d0",
+      "headerHex": "d0 96 ca 50 f7 7f 00 00 08 00 28 00 4c f6 00 00 c0 b0 6b 82 7a 02 00 00 b8 ad 03 00 00 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355454160,
+        "name_0x04": 32759,
+        "class_0x08": "0xf64c00280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 241080,
+        "class_0x10": "0x27a826bb0c0",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 3,
+      "actor": "0x27a8a40ad60",
+      "headerHex": "58 f4 c7 50 f7 7f 00 00 08 00 28 00 b3 4e 0d 00 00 fe a9 8c 7a 02 00 00 64 a9 03 00 00 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355281496,
+        "name_0x04": 32759,
+        "class_0x08": "0xd4eb300280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 239972,
+        "class_0x10": "0x27a8ca9fe00",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 4,
+      "actor": "0x27af5f8f240",
+      "headerHex": "58 b9 cf 50 f7 7f 00 00 08 00 28 00 2b 7b 0d 00 80 c7 6b 82 7a 02 00 00 20 a8 03 00 00 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 8e 01 00 00 54 cd 10 00 54 cd 10 00",
+      "guesses": {
+        "flags_0x00": 1355790680,
+        "name_0x04": 32759,
+        "class_0x08": "0xd7b2b00280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 239648,
+        "class_0x10": "0x27a826bc780",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 5,
+      "actor": "0x27a8fec8000",
+      "headerHex": "c8 95 cd 50 f7 7f 00 00 08 00 28 00 e0 4e 0d 00 00 d9 6b 82 7a 02 00 00 3e ae 03 00 00 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 8e 01 00 00 54 cd 10 00 54 cd 10 00",
+      "guesses": {
+        "flags_0x00": 1355650504,
+        "name_0x04": 32759,
+        "class_0x08": "0xd4ee000280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 241214,
+        "class_0x10": "0x27a826bd900",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 6,
+      "actor": "0x27b830cbfa0",
+      "headerHex": "b8 79 cb 50 f7 7f 00 00 08 00 28 00 67 8c 0d 00 00 af 6b 82 7a 02 00 00 d1 2b 00 00 01 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355512248,
+        "name_0x04": 32759,
+        "class_0x08": "0xd8c6700280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 11217,
+        "class_0x10": "0x27a826baf00",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 7,
+      "actor": "0x27a8fe79f60",
+      "headerHex": "38 04 c5 50 f7 7f 00 00 08 00 28 00 6b 80 0d 00 80 b2 6b 82 7a 02 00 00 cf 2b 00 00 02 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 8e 01 00 00 54 cd 10 00 54 cd 10 00",
+      "guesses": {
+        "flags_0x00": 1355088952,
+        "name_0x04": 32759,
+        "class_0x08": "0xd806b00280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 11215,
+        "class_0x10": "0x27a826bb280",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 8,
+      "actor": "0x27a98fbbb10",
+      "headerHex": "58 ea ca 50 f7 7f 00 00 08 00 28 00 3b f6 00 00 00 54 6b 82 7a 02 00 00 8a a7 03 00 8d 0a 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355475544,
+        "name_0x04": 32759,
+        "class_0x08": "0xf63b00280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 239498,
+        "class_0x10": "0x27a826b5400",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 9,
+      "actor": "0x27a91b97a30",
+      "headerHex": "58 5a ac 50 f7 7f 00 00 08 00 28 00 af d8 00 00 80 96 67 82 7a 02 00 00 a4 1c 00 00 01 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1353472600,
+        "name_0x04": 32759,
+        "class_0x08": "0xd8af00280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 7332,
+        "class_0x10": "0x27a82679680",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 10,
+      "actor": "0x27a91b90550",
+      "headerHex": "58 5a ac 50 f7 7f 00 00 08 00 28 00 54 f6 00 00 80 96 67 82 7a 02 00 00 a4 1c 00 00 02 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1353472600,
+        "name_0x04": 32759,
+        "class_0x08": "0xf65400280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 7332,
+        "class_0x10": "0x27a82679680",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 11,
+      "actor": "0x27a83a52a80",
+      "headerHex": "80 f8 d6 50 f7 7f 00 00 08 00 28 00 6c f6 00 00 80 ab 7d 82 7a 02 00 00 3f 34 00 00 01 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 8f 01 00 00 54 cd 10 00 54 cd 10 00",
+      "guesses": {
+        "flags_0x00": 1356265600,
+        "name_0x04": 32759,
+        "class_0x08": "0xf66c00280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 13375,
+        "class_0x10": "0x27a827dab80",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 12,
+      "actor": "0x27a90120aa0",
+      "headerHex": "48 8b c6 50 f7 7f 00 00 08 00 28 00 26 d8 00 00 80 dc 6b 82 7a 02 00 00 4b a5 03 00 00 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355189064,
+        "name_0x04": 32759,
+        "class_0x08": "0xd82600280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 238923,
+        "class_0x10": "0x27a826bdc80",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 13,
+      "actor": "0x27a90120ff0",
+      "headerHex": "48 8b c6 50 f7 7f 00 00 08 00 28 00 23 d8 00 00 80 dc 6b 82 7a 02 00 00 4b a5 03 00 03 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355189064,
+        "name_0x04": 32759,
+        "class_0x08": "0xd82300280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 238923,
+        "class_0x10": "0x27a826bdc80",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 14,
+      "actor": "0x27a90121540",
+      "headerHex": "48 8b c6 50 f7 7f 00 00 08 00 28 00 20 d8 00 00 80 dc 6b 82 7a 02 00 00 4b a5 03 00 04 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355189064,
+        "name_0x04": 32759,
+        "class_0x08": "0xd82000280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 238923,
+        "class_0x10": "0x27a826bdc80",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 15,
+      "actor": "0x27a90121a90",
+      "headerHex": "48 8b c6 50 f7 7f 00 00 08 00 28 00 1d d8 00 00 80 dc 6b 82 7a 02 00 00 4b a5 03 00 05 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355189064,
+        "name_0x04": 32759,
+        "class_0x08": "0xd81d00280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 238923,
+        "class_0x10": "0x27a826bdc80",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 16,
+      "actor": "0x27a903a3520",
+      "headerHex": "48 8b c6 50 f7 7f 00 00 08 00 28 00 bb 4d 0d 00 80 dc 6b 82 7a 02 00 00 9a 2b 00 00 18 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355189064,
+        "name_0x04": 32759,
+        "class_0x08": "0xd4dbb00280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 11162,
+        "class_0x10": "0x27a826bdc80",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 17,
+      "actor": "0x27ada3bd1e0",
+      "headerHex": "58 f4 c7 50 f7 7f 00 00 08 00 28 00 29 d8 00 00 40 e5 6b 82 7a 02 00 00 4a a5 03 00 03 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355281496,
+        "name_0x04": 32759,
+        "class_0x08": "0xd82900280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 238922,
+        "class_0x10": "0x27a826be540",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 18,
+      "actor": "0x27a9048f660",
+      "headerHex": "e8 83 c4 50 f7 7f 00 00 08 00 28 00 68 f6 00 00 80 b9 6b 82 7a 02 00 00 47 a5 03 00 00 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355056104,
+        "name_0x04": 32759,
+        "class_0x08": "0xf66800280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 238919,
+        "class_0x10": "0x27a826bb980",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 19,
+      "actor": "0x27a9048faf0",
+      "headerHex": "e8 83 c4 50 f7 7f 00 00 08 00 28 00 64 f6 00 00 80 b9 6b 82 7a 02 00 00 0d af 03 00 00 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355056104,
+        "name_0x04": 32759,
+        "class_0x08": "0xf66400280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 241421,
+        "class_0x10": "0x27a826bb980",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 20,
+      "actor": "0x27ada3be420",
+      "headerHex": "58 f4 c7 50 f7 7f 00 00 08 00 28 00 33 d8 00 00 40 e5 6b 82 7a 02 00 00 44 a5 03 00 00 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355281496,
+        "name_0x04": 32759,
+        "class_0x08": "0xd83300280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 238916,
+        "class_0x10": "0x27a826be540",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 21,
+      "actor": "0x27a98fb3230",
+      "headerHex": "e8 83 c4 50 f7 7f 00 00 08 00 28 00 62 f6 00 00 80 b9 6b 82 7a 02 00 00 4c a5 03 00 03 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355056104,
+        "name_0x04": 32759,
+        "class_0x08": "0xf66200280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 238924,
+        "class_0x10": "0x27a826bb980",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 22,
+      "actor": "0x27a903a7f80",
+      "headerHex": "48 8b c6 50 f7 7f 00 00 08 00 28 00 ca 4d 0d 00 80 dc 6b 82 7a 02 00 00 9a 2b 00 00 04 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355189064,
+        "name_0x04": 32759,
+        "class_0x08": "0xd4dca00280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 11162,
+        "class_0x10": "0x27a826bdc80",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 23,
+      "actor": "0x27a903a7a30",
+      "headerHex": "48 8b c6 50 f7 7f 00 00 08 00 28 00 c7 4d 0d 00 80 dc 6b 82 7a 02 00 00 9a 2b 00 00 1c 00 00 00 80 0a 77 81 7a 02 00 00 f8 7f c2 50 f7 7f 00 00 00 00 00 00 0c 01 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355189064,
+        "name_0x04": 32759,
+        "class_0x08": "0xd4dc700280008",
+        "flags_0x08": 2621448,
+        "name_0x18": 11162,
+        "class_0x10": "0x27a826bdc80",
+        "outer_0x20": "0x27a81770a80"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    }
+  ]
+}

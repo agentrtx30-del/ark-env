@@ -1,0 +1,273 @@
+{
+  "gameVersion": "1.212.962.2",
+  "engineVersion": "1.212.962.2",
+  "versionSource": "appx_package_identity",
+  "packageFullName": "StudioWildcard.4558480580BB9_1.212.962.2_x64__1w2mm55455e38",
+  "packageFamilyName": "StudioWildcard.4558480580BB9_1w2mm55455e38",
+  "engineModule": "ShooterGame.exe",
+  "gameModule": "ShooterGame.exe",
+  "d3d": {
+    "module": "d3d11.dll",
+    "flavor": "d3d11"
+  },
+  "gworld": {
+    "module": "ShooterGame.exe",
+    "rva": "0x43a5758",
+    "signature": {
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "disp_offset": 3,
+      "instr_len": 7,
+      "instr_match_offset": 0,
+      "match_rva": "0x1c612e2"
+    }
+  },
+  "engineGlobal": {
+    "module": "ShooterGame.exe",
+    "rva": "0x438e270",
+    "signature": {
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "disp_offset": 3,
+      "instr_len": 7,
+      "instr_match_offset": 0,
+      "match_rva": "0x1e4f20"
+    }
+  },
+  "gameInstanceOffset": "0x5f48",
+  "localPlayersOffset": "0xf0",
+  "localPlayerControllerOffset": null,
+  "viewportClientOffset": "0x208",
+  "viewportOffset": "0x20",
+  "resolutionOffset": "0x38",
+  "viewMatrixOffset": "0x60",
+  "sceneViewOffset": null,
+  "alternatives": {
+    "note": "same-session backups; use only if primary chain breaks after a restart",
+    "gameInstanceOffset": "0x5ce8",
+    "localPlayersOffset": "0x320",
+    "resolutionDirect": "0x191c",
+    "resolutionVia": {
+      "viewportOffset": "0x18",
+      "resolutionOffset": "0x7e8"
+    }
+  },
+  "fallbackCamera": {
+    "localPlayerToPlayerController": null,
+    "playerControllerToCameraManager": null,
+    "cameraManagerToCameraCache": null,
+    "cameraLocationOffset": null,
+    "cameraRotationOffset": null,
+    "cameraFovOffset": null
+  },
+  "sdkDump": {
+    "file": "work/ShooterGame.dump.exe",
+    "encoding": "utf16 spaced string blob; symbol names only, no numeric offsets",
+    "confirmedSymbols": [
+      "GetCharacterStatusComponent",
+      "SetBaseLevel",
+      "SetBaseLevelCustomized",
+      "SetBaseLevelNoStatChange",
+      "GetBaseLevelFromLevelUpPoints",
+      "DinoBaseLevelWeightEntry",
+      "UPrimalCharacterStatusComponent",
+      "UPrimalDinoStatusComponent",
+      "UPrimalPlayerStatusComponent",
+      "UShooterPlayerState",
+      "AShooterPlayerController"
+    ]
+  },
+  "actor": {
+    "actorArrayWorldToLevelOffset": "0xf8",
+    "actorArrayLevelOffset": "0xf8",
+    "actorArrayOffset": "0x88",
+    "actorArrayPath": [
+      "0xf8",
+      "0x88"
+    ],
+  "tamed": {
+    "boolOffset": "0x14c0",
+    "boolSize": 1,
+    "teamIDOffset": "0x148c",
+    "teamIDSize": 4,
+    "wildTeamValues": [0, -1],
+    "backupBoolOffset": "0x14d0"
+    },
+    "actorArrayNote": "Actor TArray is on PersistentLevel: UWorld+0xf8 -> ULevel+0x88.",
+    "levelsOffset": "0x268",
+    "classSuperOffset": "0x30",
+    "rootComponentOffset": "0x170",
+    "capsuleOffset": "0x268",
+    "capsuleRadiusOffset": "0x124",
+    "capsuleHalfHeightOffset": "0x12c",
+    "componentLocationOffset": "0xf0",
+    "locationOffset": "0xc00",
+    "healthOffset": "0x964",
+    "maxHealthOffset": "0x968",
+    "healthSize": 4,
+    "healthType": "float32",
+    "statusComponentOffset": "0xd10",
+    "levelOffset": "0x6cc",
+    "levelOffsetBase": "statusComponent",
+    "levelSize": 4,
+    "levelType": "int32",
+    "levelFieldName": "BaseLevel",
+    "uobjectHeader": {
+      "flagsOffset": "0x8",
+      "internalIndexOffset": "0xc",
+      "classOffset": "0x10",
+      "nameOffset": "0x18",
+      "nameNumberOffset": "0x1c",
+      "outerOffset": "0x20"
+    },
+    "fnaNameTable": {
+      "module": "ShooterGame.exe",
+      "rva": "0x43a26e0"
+    },
+    "nameLayout": {
+      "entry": "[u64 idField][u64 aux][string, null-term, padded to 8]",
+      "wideBit": 1,
+      "objectNameIndexToIdField": "idField == 2 N (ansi) or 2 N+1 (wide)",
+      "poolObjectDelta": 255648,
+      "dirOffset": "0x1C000"
+    },
+    "character": {
+      "locationOffset": "0xc00",
+      "componentLocationOffset": "0xf0",
+      "capsuleOffset": "0x268",
+      "capsuleRadiusOffset": "0x124",
+      "capsuleHalfHeightOffset": "0x12c",
+      "healthOffset": "0x964",
+      "maxHealthOffset": "0x968",
+      "healthSize": 4,
+      "healthType": "float32",
+      "statusComponentOffset": "0xd10",
+      "levelOffset": "0x6cc",
+      "levelOffsetBase": "statusComponent",
+      "levelSize": 4,
+      "levelType": "int32",
+      "levelFieldName": "BaseLevel"
+    },
+    "controller": {
+      "playerStateOffset": "0x498",
+      "pawnOffset": "0x490"
+    },
+    "playerState": {
+      "nameOffset": "0x488",
+      "nameType": "utf16_fstring",
+      "nameScanRange": [
+        "0x0",
+        "0x1800"
+      ],
+      "nameOffsetCandidates": [
+        "0x488",
+        "0x498",
+        "0x568"
+      ],
+      "nameNote": "0x488 verified live (PluralCell8379). If unstable, try 0x498 then 0x568."
+    },
+    "classification": {
+      "method": "super-chain",
+      "playerMarkers": [
+        "ShooterCharacter",
+        "PlayerController",
+        "PlayerState"
+      ],
+      "dinoMarkers": [
+        "PrimalDinoCharacter",
+        "DinoCharacter",
+        "PrimalCharacter"
+      ],
+      "tamedRule": "dino blob references a PlayerState/Controller object -> tamed, else wild"
+    }
+  },
+  "actorValidation": {
+    "session_pid": 9740,
+    "controller": "0x2bb8c8e1550",
+    "controllerPlayerStateOffset": "0x498",
+    "controllerPawnOffset": "0x490",
+    "ownPawn": "0x2bce35b6db0",
+    "health_verified": {
+      "offset": "0x964",
+      "before": 100.0,
+      "after_damage": 88.678,
+      "max_at_0x968": 100.0
+    },
+    "location_verified": {
+      "pawn_offset": "0xc00",
+      "component_offset": "0xf0"
+    },
+    "capsule_verified": {
+      "radius_offset": "0x124",
+      "varies_per_creature": [
+        62.87,
+        57.43,
+        47.29,
+        45.0
+      ],
+      "halfheight_offset": "0x12c"
+    },
+    "level_verified": {
+      "statusComponentOffset": "0xd10",
+      "component_pointer_matched": "29/29 scanned pawns",
+      "levelOffset": "0x6cc",
+      "levelOffsetBase": "statusComponent",
+      "expectedLevel": 225,
+      "matchedValue": 225,
+      "note": "pawn+0xd10 -> UPrimalCharacterStatusComponent*; int32 at component+0x6cc equals UI level (225 Triceratops). Matches SDK symbol BaseLevel."
+    },
+    "superStructConfirmed": "0x30",
+    "playerStateNameCandidates": [
+      {
+        "offset": "0x488",
+        "value": "PluralCell8379"
+      },
+      {
+        "offset": "0x498",
+        "value": "PluralCell8379"
+      },
+      {
+        "offset": "0x568",
+        "value": "PluralCell8379"
+      },
+      {
+        "offset": "0x5e8",
+        "value": "Human"
+      },
+      {
+        "offset": "0x9f8",
+        "value": "Tribe of Human"
+      }
+    ],
+    "playerStateNameSelected": "0x488"
+  },
+  "validation": {
+    "session_pid": 24768,
+    "world_valid": true,
+    "engine_valid": true,
+    "gameInstance_valid": true,
+    "localPlayers_count": 1,
+    "resolution": {
+      "width": 1200,
+      "height": 900,
+      "valid": true,
+      "path": "viewportClient+0x20 -> +0x38"
+    },
+    "matrix": {
+      "path": "viewportClient+0x60",
+      "camera_coupled": true,
+      "changed_samples": "4/5",
+      "layout": "row-major 4x4 camera->world transform; last row = position, 4th col = 0,0,0,1"
+    }
+  },
+  "notes": [
+    "Monolithic Store build: ShooterGame.exe is engine and game module.",
+    "Globals stored as module + RVA; member offsets object-relative.",
+    "Actor list two-hop: world+0xf8 (PersistentLevel) then level+0x88 (ULevel::Actors).",
+    "FName pool at ShooterGame.exe+0x43a26e0; runtime tool walks descriptor blocks for coverage; unresolved ids render as id_N.",
+    "Health float32 at pawn+0x964, max at +0x968 (verified by live damage diff).",
+    "Capsule half-height at capsule(+0x268)+0x12c, radius +0x124; scales per creature.",
+    "Level: pawn+0xd10 -> status component; int32 at component+0x6cc = BaseLevel (verified vs UI level 225).",
+    "PlayerState name is UTF-16 FString at PlayerState+0x488 (verified live, dynamic).",
+    "localPlayerControllerOffset remains optional; structural controller discovery works without it.",
+    "On game patch: re-dump, re-scan signatures, re-run damage diff and level probe if member offsets drift."
+  ]
+}

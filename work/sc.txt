@@ -1,0 +1,171 @@
+[2026-09-05 17:39:47.917] [info] ark-full starting
+[2026-09-05 17:39:47.917] [info] hotkeys: F8 = toggle overlay, L = exit
+[2026-09-05 17:39:47.927] [info] name table: 13754 entries (ok)
+[2026-09-05 17:39:47.939] [info] found ARK pid=17272
+[2026-09-05 17:39:47.939] [info] attach success: base=0x00007FF651E50000
+
+=== ARK-FULL SELF CHECK ===
+[roots]
+  ShooterGame.exe base = 0x00007FF651E50000
+  gworldAddress        = 0x00007FF6561F5758
+  engineGlobalAddress  = 0x00007FF6561DE270
+[anchor]
+  pos = 46492.9 47630.1 -19560.6
+  try gi=+0x5F48 lp=+0xF0
+    engine         = 0x000001D8C09D76A0
+    gameInstance   = 0x000001D8C08790D0
+    localPlayers   = 0x000001D90BD7F6C0 count=1
+    localPlayer    = 0x000001D90BD7F6E0
+    DISCOVERED viewportClient at localPlayer+0x220 (sig=1 res=yes)
+    viewportClient = 0x000001D938E84800 sig=1
+    matrix pos     = -108353.6 224078.4 -14787.0
+    matrix row0    = 0.410 1.094 0.000 0.000
+    matrix row3    = -108353.6 224078.4 -14787.0 1.000
+[camera]
+  resolution = 1200x900
+  pos        = -108353.6 224078.4 -14787.0
+[actors]
+  world = 0x000001D9B8C25940
+  level = 0x000001D8C08C3B80
+  array = 0x000001D8C08C3C08
+  data  = 0x000001D89B9B5540
+  count = 1046
+[pawn-like]
+  001 actor=0x000001D9128F0000 pos=(39845.0, 43790.0, -2241.0) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(39845.0, 43790.0, -2241.0)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=0
+  002 actor=0x000001D991A66D80 pos=(46492.9, 47630.1, -19560.6) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(46492.9, 47630.1, -19560.6)
+      hp=0.0/0.0 lvl=234554 r=50.0 hh=100.0 tamed=1
+  003 actor=0x000001D910DF9000 pos=(-112729.3, 239368.9, -13349.5) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(-112729.3, 239368.9, -13349.5)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=1
+  004 actor=0x000001D90B98B680 pos=(46590.0, 50010.0, -19660.0) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(46590.0, 50010.0, -19660.0)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=0
+  005 actor=0x000001D91813BB10 pos=(-109730.0, -16014.6, -45977.8) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(-109730.0, -16014.6, -45977.8)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=1
+  006 actor=0x000001D9128F5A50 pos=(68089.3, 267436.6, -6252.5) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(68089.3, 267436.6, -6252.5)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=0
+  007 actor=0x000001D9128F0FF0 pos=(68089.3, 267436.6, -6252.5) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(68089.3, 267436.6, -6252.5)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=1
+  008 actor=0x000001D910EE1540 pos=(27334.4, 249943.0, -23626.8) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(27334.4, 249943.0, -23626.8)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=0
+  009 actor=0x000001D910EE1A90 pos=(27334.3, 260574.4, -27220.9) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(27334.3, 260574.4, -27220.9)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=1
+  010 actor=0x000001D910EE1FE0 pos=(27334.3, 266144.4, -27836.9) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(27334.3, 266144.4, -27836.9)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=1
+  011 actor=0x000001D910EE2530 pos=(27334.3, 274533.0, -26237.5) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(27334.3, 274533.0, -26237.5)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=1
+  012 actor=0x000001D911103520 pos=(27334.3, 278524.8, -25967.0) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(27334.3, 278524.8, -25967.0)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=0
+  013 actor=0x000001D99A10D1E0 pos=(16523.8, 51662.2, -35581.9) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(16523.8, 51662.2, -35581.9)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=0
+  014 actor=0x000001D91120F660 pos=(-138350.0, -135960.0, -3540.0) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(-138350.0, -135960.0, -3540.0)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=1
+  015 actor=0x000001D91120FAF0 pos=(-109281.7, 230574.1, 50000.0) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(-109281.7, 230574.1, 50000.0)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=1
+  016 actor=0x000001D99A10E420 pos=(68571.8, -33290.6, -35605.0) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(68571.8, -33290.6, -35605.0)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=0
+  017 actor=0x000001D918133230 pos=(-89650.0, -135960.0, -3540.0) cons=0 capsule=0
+      direct=(4.0, 1.0, 0.1)
+      comp  =(-89650.0, -135960.0, -3540.0)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=0
+  018 actor=0x000001D911107F80 pos=(61323.1, 136776.6, -17240.4) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(61323.1, 136776.6, -17240.4)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=0
+  019 actor=0x000001D911107A30 pos=(75425.1, 141746.9, -19306.0) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(75425.1, 141746.9, -19306.0)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=0
+  020 actor=0x000001D910EE3FC0 pos=(81832.2, 172606.9, -28624.2) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(81832.2, 172606.9, -28624.2)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=0
+  021 actor=0x000001D918134470 pos=(-108974.4, 195148.6, -6099.4) cons=1 capsule=0
+      direct=(0.0, 0.0, 0.0)
+      comp  =(-108974.4, 195148.6, -6099.4)
+      hp=0.0/0.0 lvl=-1 r=50.0 hh=100.0 tamed=0
+  022 actor=0x000001D910B68F70 pos=(-113927.0, 234912.8, -14334.6) cons=1 capsule=1
+      direct=(0.0, 0.0, 0.0)
+      comp  =(-113927.0, 234912.8, -14334.6)
+      hp=0.0/0.0 lvl=-1 r=55.7 hh=92.0 tamed=1
+      chain: PlayerStart|NavigationObjectBase|Actor|Object
+  023 actor=0x000001D9094A94C0 pos=(-88001.6, 217960.6, -14241.5) cons=1 capsule=1
+      direct=(0.0, 0.0, 0.0)
+      comp  =(-88001.6, 217960.6, -14241.5)
+      hp=0.0/0.0 lvl=-1 r=56.4 hh=92.0 tamed=1
+      chain: PlayerStart|NavigationObjectBase|Actor|Object
+  024 actor=0x000001D910B684D0 pos=(-84755.6, 213967.6, -14222.9) cons=1 capsule=1
+      direct=(0.0, 0.0, 0.0)
+      comp  =(-84755.6, 213967.6, -14222.9)
+      hp=0.0/0.0 lvl=-1 r=55.4 hh=92.0 tamed=0
+      chain: PlayerStart|NavigationObjectBase|Actor|Object
+  025 actor=0x000001D910B67F80 pos=(-81190.6, 209755.6, -13933.0) cons=1 capsule=1
+      direct=(0.0, 0.0, 0.0)
+      comp  =(-81190.6, 209755.6, -13933.0)
+      hp=0.0/0.0 lvl=-1 r=55.8 hh=92.0 tamed=1
+      chain: PlayerStart|NavigationObjectBase|Actor|Object
+  026 actor=0x000001D910B67A30 pos=(-80587.6, 203726.6, -14292.9) cons=1 capsule=1
+      direct=(0.0, 0.0, 0.0)
+      comp  =(-80587.6, 203726.6, -14292.9)
+      hp=0.0/0.0 lvl=-1 r=54.1 hh=92.0 tamed=0
+      chain: PlayerStart|NavigationObjectBase|Actor|Object
+  027 actor=0x000001D910B674E0 pos=(-91313.6, 224024.6, -14318.0) cons=1 capsule=1
+      direct=(0.0, 0.0, 0.0)
+      comp  =(-91313.6, 224024.6, -14318.0)
+      hp=0.0/0.0 lvl=-1 r=44.2 hh=92.0 tamed=0
+      chain: PlayerStart|NavigationObjectBase|Actor|Object
+  028 actor=0x000001D910B66F90 pos=(-97059.6, 226600.6, -14242.5) cons=1 capsule=1
+      direct=(0.0, 0.0, 0.0)
+      comp  =(-97059.6, 226600.6, -14242.5)
+      hp=0.0/0.0 lvl=-1 r=51.9 hh=92.0 tamed=1
+  029 actor=0x000001D910B664F0 pos=(-100523.6, 229131.6, -14274.9) cons=1 capsule=1
+      direct=(0.0, 0.0, 0.0)
+      comp  =(-100523.6, 229131.6, -14274.9)
+      hp=0.0/0.0 lvl=-1 r=52.2 hh=92.0 tamed=0
+  030 actor=0x000001D910B65FA0 pos=(-103850.6, 232168.6, -14241.4) cons=1 capsule=1
+      direct=(0.0, 0.0, 0.0)
+      comp  =(-103850.6, 232168.6, -14241.4)
+      hp=0.0/0.0 lvl=-1 r=53.4 hh=92.0 tamed=0
+  031 actor=0x000001D910B65A50 pos=(-107656.6, 235113.6, -14311.7) cons=1 capsule=1
+      direct=(0.0, 0.0, 0.0)
+      comp  =(-107656.6, 235113.6, -14311.7)
+      hp=0.0/0.0 lvl=-1 r=53.9 hh=92.0 tamed=1
+  032 actor=0x000001D910B65500 pos=(-113031.6, 234143.6, -14310.0) cons=1 capsule=1
+      direct=(0.0, 0.0, 0.0)
+      comp  =(-113031.6, 234143.6, -14310.0)
+      hp=0.0/0.0 lvl=-1 r=42.2 hh=92.0 tamed=0
+
+[summary]
+pawnLike=32 cam=1
+[2026-09-05 17:39:47.944] [info] self-check complete: pawnLike=32 cam=1

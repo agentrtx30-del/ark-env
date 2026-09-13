@@ -1,0 +1,325 @@
+{
+  "pid": 35388,
+  "process_window": {
+    "hwnd": 4131150,
+    "title": "MSCTFIME UI",
+    "class_name": "MSCTFIME UI"
+  },
+  "package_family_name": null,
+  "module": "ShooterGame.exe",
+  "module_base": "0x7ff74ca20000",
+  "gworld_var": "0x7ff750dc5758",
+  "world": "0x27af4d45940",
+  "arrayAddress": "0x27af4d45a90",
+  "arrayOffset": "0x150",
+  "dataPointer": "0x27b8c147700",
+  "count": 103,
+  "capacity": 103,
+  "actorsRead": 16,
+  "actors": [
+    {
+      "index": 0,
+      "actor": "0x27b8c5fc000",
+      "headerHex": "90 7d c6 50 f7 7f 00 00 40 00 00 00 6a 8c 0d 00 00 62 77 82 7a 02 00 00 36 32 00 00 01 00 00 00 40 59 d4 f4 7a 02 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355185552,
+        "name_0x04": 32759,
+        "class_0x08": "0xd8c6a00000040",
+        "flags_0x08": 64,
+        "name_0x18": 12854,
+        "class_0x10": "0x27a82776200",
+        "outer_0x20": "0x27af4d45940"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 1,
+      "actor": "0x27b8c5fc180",
+      "headerHex": "90 7d c6 50 f7 7f 00 00 40 00 00 00 6b 8c 0d 00 00 62 77 82 7a 02 00 00 36 32 00 00 02 00 00 00 40 59 d4 f4 7a 02 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355185552,
+        "name_0x04": 32759,
+        "class_0x08": "0xd8c6b00000040",
+        "flags_0x08": 64,
+        "name_0x18": 12854,
+        "class_0x10": "0x27a82776200",
+        "outer_0x20": "0x27af4d45940"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 2,
+      "actor": "0x27b8c5fbe80",
+      "headerHex": "90 7d c6 50 f7 7f 00 00 40 00 00 00 6c 8c 0d 00 00 62 77 82 7a 02 00 00 36 32 00 00 03 00 00 00 40 59 d4 f4 7a 02 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355185552,
+        "name_0x04": 32759,
+        "class_0x08": "0xd8c6c00000040",
+        "flags_0x08": 64,
+        "name_0x18": 12854,
+        "class_0x10": "0x27a82776200",
+        "outer_0x20": "0x27af4d45940"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 3,
+      "actor": "0x27b8c5fbb80",
+      "headerHex": "90 7d c6 50 f7 7f 00 00 40 00 00 00 6d 8c 0d 00 00 62 77 82 7a 02 00 00 36 32 00 00 04 00 00 00 40 59 d4 f4 7a 02 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355185552,
+        "name_0x04": 32759,
+        "class_0x08": "0xd8c6d00000040",
+        "flags_0x08": 64,
+        "name_0x18": 12854,
+        "class_0x10": "0x27a82776200",
+        "outer_0x20": "0x27af4d45940"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 4,
+      "actor": "0x27b8c5fb880",
+      "headerHex": "90 7d c6 50 f7 7f 00 00 40 00 00 00 6e 8c 0d 00 00 62 77 82 7a 02 00 00 36 32 00 00 05 00 00 00 40 59 d4 f4 7a 02 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355185552,
+        "name_0x04": 32759,
+        "class_0x08": "0xd8c6e00000040",
+        "flags_0x08": 64,
+        "name_0x18": 12854,
+        "class_0x10": "0x27a82776200",
+        "outer_0x20": "0x27af4d45940"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 5,
+      "actor": "0x27b8c5fb700",
+      "headerHex": "90 7d c6 50 f7 7f 00 00 40 00 00 00 6f 8c 0d 00 00 62 77 82 7a 02 00 00 36 32 00 00 06 00 00 00 40 59 d4 f4 7a 02 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355185552,
+        "name_0x04": 32759,
+        "class_0x08": "0xd8c6f00000040",
+        "flags_0x08": 64,
+        "name_0x18": 12854,
+        "class_0x10": "0x27a82776200",
+        "outer_0x20": "0x27af4d45940"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 6,
+      "actor": "0x27b8c5fb580",
+      "headerHex": "90 7d c6 50 f7 7f 00 00 40 00 00 00 70 8c 0d 00 00 62 77 82 7a 02 00 00 36 32 00 00 07 00 00 00 40 59 d4 f4 7a 02 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355185552,
+        "name_0x04": 32759,
+        "class_0x08": "0xd8c7000000040",
+        "flags_0x08": 64,
+        "name_0x18": 12854,
+        "class_0x10": "0x27a82776200",
+        "outer_0x20": "0x27af4d45940"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 7,
+      "actor": "0x27b8c5fb400",
+      "headerHex": "90 7d c6 50 f7 7f 00 00 40 00 00 00 71 8c 0d 00 00 62 77 82 7a 02 00 00 36 32 00 00 08 00 00 00 40 59 d4 f4 7a 02 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355185552,
+        "name_0x04": 32759,
+        "class_0x08": "0xd8c7100000040",
+        "flags_0x08": 64,
+        "name_0x18": 12854,
+        "class_0x10": "0x27a82776200",
+        "outer_0x20": "0x27af4d45940"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 8,
+      "actor": "0x27b8c5fb280",
+      "headerHex": "90 7d c6 50 f7 7f 00 00 40 00 00 00 72 8c 0d 00 00 62 77 82 7a 02 00 00 36 32 00 00 09 00 00 00 40 59 d4 f4 7a 02 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355185552,
+        "name_0x04": 32759,
+        "class_0x08": "0xd8c7200000040",
+        "flags_0x08": 64,
+        "name_0x18": 12854,
+        "class_0x10": "0x27a82776200",
+        "outer_0x20": "0x27af4d45940"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 9,
+      "actor": "0x27b8c5fb100",
+      "headerHex": "90 7d c6 50 f7 7f 00 00 40 00 00 00 73 8c 0d 00 00 62 77 82 7a 02 00 00 36 32 00 00 0a 00 00 00 40 59 d4 f4 7a 02 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355185552,
+        "name_0x04": 32759,
+        "class_0x08": "0xd8c7300000040",
+        "flags_0x08": 64,
+        "name_0x18": 12854,
+        "class_0x10": "0x27a82776200",
+        "outer_0x20": "0x27af4d45940"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 10,
+      "actor": "0x27b8c5faf80",
+      "headerHex": "90 7d c6 50 f7 7f 00 00 40 00 00 00 74 8c 0d 00 00 62 77 82 7a 02 00 00 36 32 00 00 0b 00 00 00 40 59 d4 f4 7a 02 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355185552,
+        "name_0x04": 32759,
+        "class_0x08": "0xd8c7400000040",
+        "flags_0x08": 64,
+        "name_0x18": 12854,
+        "class_0x10": "0x27a82776200",
+        "outer_0x20": "0x27af4d45940"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 11,
+      "actor": "0x27b8c5fae00",
+      "headerHex": "90 7d c6 50 f7 7f 00 00 40 00 00 00 75 8c 0d 00 00 62 77 82 7a 02 00 00 36 32 00 00 0c 00 00 00 40 59 d4 f4 7a 02 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355185552,
+        "name_0x04": 32759,
+        "class_0x08": "0xd8c7500000040",
+        "flags_0x08": 64,
+        "name_0x18": 12854,
+        "class_0x10": "0x27a82776200",
+        "outer_0x20": "0x27af4d45940"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 12,
+      "actor": "0x27b8c5fac80",
+      "headerHex": "90 7d c6 50 f7 7f 00 00 40 00 00 00 76 8c 0d 00 00 62 77 82 7a 02 00 00 36 32 00 00 0d 00 00 00 40 59 d4 f4 7a 02 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355185552,
+        "name_0x04": 32759,
+        "class_0x08": "0xd8c7600000040",
+        "flags_0x08": 64,
+        "name_0x18": 12854,
+        "class_0x10": "0x27a82776200",
+        "outer_0x20": "0x27af4d45940"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 13,
+      "actor": "0x27b8c5fab00",
+      "headerHex": "90 7d c6 50 f7 7f 00 00 40 00 00 00 77 8c 0d 00 00 62 77 82 7a 02 00 00 36 32 00 00 0e 00 00 00 40 59 d4 f4 7a 02 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355185552,
+        "name_0x04": 32759,
+        "class_0x08": "0xd8c7700000040",
+        "flags_0x08": 64,
+        "name_0x18": 12854,
+        "class_0x10": "0x27a82776200",
+        "outer_0x20": "0x27af4d45940"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 14,
+      "actor": "0x27b8c5fa980",
+      "headerHex": "90 7d c6 50 f7 7f 00 00 40 00 00 00 78 8c 0d 00 00 62 77 82 7a 02 00 00 36 32 00 00 0f 00 00 00 40 59 d4 f4 7a 02 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355185552,
+        "name_0x04": 32759,
+        "class_0x08": "0xd8c7800000040",
+        "flags_0x08": 64,
+        "name_0x18": 12854,
+        "class_0x10": "0x27a82776200",
+        "outer_0x20": "0x27af4d45940"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    },
+    {
+      "index": 15,
+      "actor": "0x27b8c5fa800",
+      "headerHex": "90 7d c6 50 f7 7f 00 00 40 00 00 00 79 8c 0d 00 00 62 77 82 7a 02 00 00 36 32 00 00 10 00 00 00 40 59 d4 f4 7a 02 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00",
+      "guesses": {
+        "flags_0x00": 1355185552,
+        "name_0x04": 32759,
+        "class_0x08": "0xd8c7900000040",
+        "flags_0x08": 64,
+        "name_0x18": 12854,
+        "class_0x10": "0x27a82776200",
+        "outer_0x20": "0x27af4d45940"
+      },
+      "validity": {
+        "class_0x08_valid": false,
+        "class_0x10_valid": true,
+        "outer_0x20_valid": true
+      }
+    }
+  ]
+}

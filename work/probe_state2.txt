@@ -1,0 +1,72 @@
+{
+  "pid": 24768,
+  "module": "ShooterGame.exe",
+  "module_base": "0x7ff74ca20000",
+  "rva": "0x438e270",
+  "address": "0x7ff750dae270",
+  "value": "0x153c1ef76a0",
+  "value_valid": true
+}
+{
+  "pid": 24768,
+  "module": "ShooterGame.exe",
+  "module_base": "0x7ff74ca20000",
+  "rva": "0x43a5758",
+  "address": "0x7ff750dc5758",
+  "value": "0x154ea700000",
+  "value_valid": true
+}
+{
+  "pid": 24768,
+  "module": "ShooterGame.exe",
+  "module_base": "0x7ff74ca20000",
+  "rva": "0x40846d8",
+  "address": "0x7ff750aa46d8",
+  "value": "0x7ff74fa90730",
+  "value_valid": false
+}
+{
+  "pid": 24768,
+  "module": "ShooterGame.exe",
+  "module_base": "0x7ff74ca20000",
+  "rva": "0x40857a0",
+  "address": "0x7ff750aa57a0",
+  "value": "0x7ff74faaaa60",
+  "value_valid": false
+}
+{
+  "pid": 24768,
+  "module": "ShooterGame.exe",
+  "module_base": "0x7ff74ca20000",
+  "rva": "0x40857c0",
+  "address": "0x7ff750aa57c0",
+  "value": "0x7ff74faaaf90",
+  "value_valid": false
+}
+{
+  "pid": 24768,
+  "module": "ShooterGame.exe",
+  "module_base": "0x7ff74ca20000",
+  "rva": "0x40857e0",
+  "address": "0x7ff750aa57e0",
+  "value": "0x7ff74faab500",
+  "value_valid": false
+}
+{
+  "pid": 24768,
+  "module": "ShooterGame.exe",
+  "module_base": "0x7ff74ca20000",
+  "rva": "0x4085800",
+  "address": "0x7ff750aa5800",
+  "value": "0x7ff74faabe50",
+  "value_valid": false
+}
+{
+  "pid": 24768,
+  "module": "ShooterGame.exe",
+  "module_base": "0x7ff74ca20000",
+  "rva": "0x4085820",
+  "address": "0x7ff750aa5820",
+  "value": "0x7ff74faac8d0",
+  "value_valid": false
+}

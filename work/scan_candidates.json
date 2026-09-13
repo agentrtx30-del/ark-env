@@ -1,0 +1,151 @@
+{
+  "dump_file": "work/ShooterGame.dump.exe",
+  "dump_size": 74108928,
+  "result_count": 16,
+  "results": [
+    {
+      "kind": "gworld",
+      "signature_name": "mov_rax_rip_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "match_rva": "0x1e4f20",
+      "global_rva": "0x438e270",
+      "section": ".data",
+      "writable": true
+    },
+    {
+      "kind": "gworld",
+      "signature_name": "mov_rax_rip_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "match_rva": "0x1c612e2",
+      "global_rva": "0x43a5758",
+      "section": ".data",
+      "writable": true
+    },
+    {
+      "kind": "gworld",
+      "signature_name": "mov_rax_rip_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "match_rva": "0x3055090",
+      "global_rva": "0x40846d8",
+      "section": ".data",
+      "writable": true
+    },
+    {
+      "kind": "gworld",
+      "signature_name": "mov_rax_rip_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "match_rva": "0x30734c0",
+      "global_rva": "0x40857a0",
+      "section": ".data",
+      "writable": true
+    },
+    {
+      "kind": "gworld",
+      "signature_name": "mov_rax_rip_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "match_rva": "0x3075390",
+      "global_rva": "0x40857c0",
+      "section": ".data",
+      "writable": true
+    },
+    {
+      "kind": "gworld",
+      "signature_name": "mov_rax_rip_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "match_rva": "0x3076e50",
+      "global_rva": "0x40857e0",
+      "section": ".data",
+      "writable": true
+    },
+    {
+      "kind": "gworld",
+      "signature_name": "mov_rax_rip_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "match_rva": "0x3078f20",
+      "global_rva": "0x4085800",
+      "section": ".data",
+      "writable": true
+    },
+    {
+      "kind": "gworld",
+      "signature_name": "mov_rax_rip_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "match_rva": "0x307a780",
+      "global_rva": "0x4085820",
+      "section": ".data",
+      "writable": true
+    },
+    {
+      "kind": "engineGlobal",
+      "signature_name": "mov_rax_rip_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "match_rva": "0x1e4f20",
+      "global_rva": "0x438e270",
+      "section": ".data",
+      "writable": true
+    },
+    {
+      "kind": "engineGlobal",
+      "signature_name": "mov_rax_rip_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "match_rva": "0x1c612e2",
+      "global_rva": "0x43a5758",
+      "section": ".data",
+      "writable": true
+    },
+    {
+      "kind": "engineGlobal",
+      "signature_name": "mov_rax_rip_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "match_rva": "0x3055090",
+      "global_rva": "0x40846d8",
+      "section": ".data",
+      "writable": true
+    },
+    {
+      "kind": "engineGlobal",
+      "signature_name": "mov_rax_rip_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "match_rva": "0x30734c0",
+      "global_rva": "0x40857a0",
+      "section": ".data",
+      "writable": true
+    },
+    {
+      "kind": "engineGlobal",
+      "signature_name": "mov_rax_rip_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "match_rva": "0x3075390",
+      "global_rva": "0x40857c0",
+      "section": ".data",
+      "writable": true
+    },
+    {
+      "kind": "engineGlobal",
+      "signature_name": "mov_rax_rip_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "match_rva": "0x3076e50",
+      "global_rva": "0x40857e0",
+      "section": ".data",
+      "writable": true
+    },
+    {
+      "kind": "engineGlobal",
+      "signature_name": "mov_rax_rip_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "match_rva": "0x3078f20",
+      "global_rva": "0x4085800",
+      "section": ".data",
+      "writable": true
+    },
+    {
+      "kind": "engineGlobal",
+      "signature_name": "mov_rax_rip_ret",
+      "pattern": "48 8B 05 ?? ?? ?? ?? C3",
+      "match_rva": "0x307a780",
+      "global_rva": "0x4085820",
+      "section": ".data",
+      "writable": true
+    }
+  ]
+}
