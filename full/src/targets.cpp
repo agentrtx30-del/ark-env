@@ -23,31 +23,54 @@ bool readLogicalTarget(
     out = {};
     out.actorAddress = actor;
 
-    // ---- Location: component-first (authoritative), direct as last resort.
+    // ---- Location: validated component read (authoritative).
+    // A component is trusted only if it carries a plausible CapsuleRadius at
+    // +0x124; this rejects jittering mesh components. While we have the
+    // validated component open, also capture its radius/half-height so box
+    // sizes stay correct even when offsets.capsuleOffset (0x268) is dead.
     Vec3f pos{};
     bool havePos = false;
+    float valRadius = 0.0f, valHalf = 0.0f;
+    bool valOk = false;
+    int valSrc = -1;
+
     const uint32_t compOffsets[2] = { offsets.capsuleOffset, 0x170u };
     for (int k = 0; k < 2 && !havePos; ++k)
     {
         uint64_t comp = 0;
         if (!readPtr(mem, actor + compOffsets[k], comp)) continue;
+
+        float radius = 0.0f;
+        if (!mem.read(comp + 0x124, radius)) continue;
+        if (!std::isfinite(radius) || radius <= 0.0f || radius > 1500.0f) continue;
+
+        float half = 0.0f;
+        const bool haveHalf = mem.read(comp + 0x12c, half) &&
+                              std::isfinite(half) &&
+                              half > 0.0f && half < 3000.0f;
+
         Vec3f cpos;
         if (!mem.read(comp + 0xF0, cpos)) continue;   // componentLocationOffset
         if (!plausibleVec3(cpos)) continue;
+
         pos = cpos;
         havePos = true;
+        if (haveHalf && !valOk)
+        {
+            valRadius = radius;
+            valHalf = half;
+            valOk = true;
+            valSrc = k;
+        }
     }
-    if (!havePos)
-    {
-        Vec3f dpos;
-        if (mem.read(actor + offsets.locationOffset, dpos) && plausibleVec3(dpos))
-        { pos = dpos; havePos = true; }
-    }
+    // NO fallback to actor+0xC00 (stale/zero in this build => flicker).
+
     if (!havePos)
         return false;
-    out.worldPos = pos;
+    out.worldPos = pos;   // capsule CENTER (tracker space); main converts to base
 
-    // ---- Capsule: optional, with fallback box size.
+    // ---- Capsule: prefer explicit capsule-component read, else the values
+    //      captured from the validated component above, else default box.
     uint64_t capsule = 0;
     float radius = 0.0f, halfHeight = 0.0f;
     if (readPtr(mem, actor + offsets.capsuleOffset, capsule) &&
@@ -59,6 +82,12 @@ bool readLogicalTarget(
     {
         out.capsuleRadius = radius;
         out.halfHeight = halfHeight;
+        out.capsuleOk = true;
+    }
+    else if (valOk)
+    {
+        out.capsuleRadius = valRadius;
+        out.halfHeight = valHalf;
         out.capsuleOk = true;
     }
     else
