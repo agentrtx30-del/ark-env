@@ -81,17 +81,26 @@ static bool plausiblePos(const Vec3f& p)
     return (ax + ay + az) > 10000.0f;
 }
 
+// ARK has no roll: right stays horizontal, up keeps strong +Z.
 static bool orientSane(const ao::Camera& c)
 {
     return fabsf(c.right.z) < 0.50f && c.up.z > 0.25f;
 }
 
+// Viewport-size gate: the real client renders near the window size
+// (1200x900 vs client rect 1200x933 is fine); icon/minimap viewports
+// (17x105 etc.) must never reach the projector.
 static bool sizeSane(const ao::Camera& c, int fbW, int fbH)
 {
     if (c.screenW < 320 || c.screenH < 240) return false;
     const int dw = c.screenW - fbW;
     const int dh = c.screenH - fbH;
     return (dw > -96 && dw < 96 && dh > -96 && dh < 96);
+}
+
+static float dot3(const Vec3f& a, const Vec3f& b)
+{
+    return a.x * b.x + a.y * b.y + a.z * b.z;
 }
 
 static bool readComponentPos(const WinMemory& mem, const OffsetProfile& off,
@@ -179,7 +188,7 @@ static void dumpOpen()
 }
 static void dumpClose()
 {
-    if (g_dumpFile) { fflush(g_dumpFile); fclose(g_dumpFile); g_dumpFile = nullptr; }
+    if (g_dumpFile) { fclose(g_dumpFile); g_dumpFile = nullptr; }
 }
 static void evtOpen()
 {
@@ -241,9 +250,8 @@ static const int   kBlindPending   = 20;
 static const int   kBlindLocked    = 30;
 static const int   kDyingFrames    = 15;
 static const int   kPinFailNeed    = 10;
-static const int   kJumpVotesNeed  = 8;
-static const float kOwnPickCm      = 300.0f;
-static const float kFovContDeg     = 10.0f;   // v24: real cam quantizes 84.5..90.9
+static const int   kJumpVotesNeed  = 10;
+static const float kLerp           = 0.40f;
 
 static void absorb(Tracked& t, const Vec3f& p)
 {
@@ -342,7 +350,11 @@ static void updateTarget(const WinMemory& mem, const OffsetProfile& off, Tracked
     {
         int src = 0;
         if (readComponentPos(mem, off, t.ptr, pos, &src))
-            posOk = true;   // v23: use for this frame, keep compPtr unchanged
+        {
+            t.compPtr = validatedComponent(mem, off, t.ptr);
+            if (!t.ownerOff && t.compPtr) t.ownerOff = discoverOwnerOff(mem, t.compPtr, t.ptr);
+            posOk = true;
+        }
     }
 
     if (++t.refresh >= 30)
@@ -426,7 +438,11 @@ static void updateTarget(const WinMemory& mem, const OffsetProfile& off, Tracked
         evt("REMOVE_LOCKED", t.ptr, t.blind);
 
     if (t.state != Tracked::State::Pending && t.havePos)
-        t.draw = t.meas;   // zero-lag
+    {
+        t.draw.x += (t.meas.x - t.draw.x) * kLerp;
+        t.draw.y += (t.meas.y - t.draw.y) * kLerp;
+        t.draw.z += (t.meas.z - t.draw.z) * kLerp;
+    }
 }
 
 static int countLocked(const std::vector<Tracked>& tracked)
@@ -435,12 +451,6 @@ static int countLocked(const std::vector<Tracked>& tracked)
     for (const Tracked& t : tracked)
         if (t.state == Tracked::State::Locked) ++n;
     return n;
-}
-
-static const Vec3f& ocamSafe(const ao::Camera& cam, bool have)
-{
-    static const Vec3f zero{ 0.0f, 0.0f, 0.0f };
-    return have ? cam.pos : zero;
 }
 
 // ---------------------------------------------------------------------------
@@ -454,7 +464,7 @@ int main(int argc, char** argv)
         return ao::overlayDemo(nullptr) ? 0 : 1;
 
     logInit(L".\\work\\ark-full.log");
-    logInfo("ark-full starting (lock-on tracker v24: fov-tolerant gate + cheap dump)");
+    logInfo("ark-full starting (lock-on tracker v21: compile-clean own-pawn + gates)");
     logInfo("hotkeys: F8 = toggle overlay, F9 = debug dump 300 frames, L = exit");
     {
         char cwd[MAX_PATH] = { 0 };
@@ -544,11 +554,12 @@ int main(int argc, char** argv)
         float trustedFov = 0.0f;
         bool  haveTrusted = false;
         int   rejectStreak = 0;
+        Vec3f camJumpCand{ 0.0f, 0.0f, 0.0f };
+        int   camJumpVotes = 0;
 
         ActorArrayState cachedActors;
         std::vector<Tracked> tracked;
         std::vector<ao::Target> overlayTargets;
-        std::vector<uint64_t> ptrBuf;
         overlayTargets.reserve(64);
 
         CameraState stableCam{};
@@ -571,7 +582,6 @@ int main(int argc, char** argv)
                 if (g_dumpFramesLeft > 0)
                 {
                     g_dumpFramesLeft = 0;
-                    if (g_dumpFile) fflush(g_dumpFile);
                     logInfo("debug dump stopped");
                 }
                 else
@@ -596,7 +606,7 @@ int main(int argc, char** argv)
 
             if (!updateOverlayRect(gameWindow, lastRect, overlayInit))
             {
-                std::this_thread::sleep_for(std::chrono::milliseconds(8));
+                std::this_thread::sleep_for(std::chrono::milliseconds(33));
                 continue;
             }
 
@@ -631,58 +641,54 @@ int main(int argc, char** argv)
                 }
 
                 const bool discover = (g_frame % 30 == 0) || tracked.empty();
-                if (discover && cachedActors.valid && cachedActors.count > 0)
+                if (discover && cachedActors.valid)
                 {
                     const int scan = cachedActors.count < 4096
                                      ? cachedActors.count : 4096;
-                    ptrBuf.resize((size_t)scan);
-                    if (mem.readBytes(cachedActors.dataArray, ptrBuf.data(),
-                                      (size_t)scan * 8))
+                    for (int i = 0; i < scan && tracked.size() < 96; ++i)
                     {
-                        for (int i = 0; i < scan && tracked.size() < 96; ++i)
+                        uint64_t ap = 0;
+                        if (!readPtr(mem, cachedActors.dataArray + (uint64_t)i * 8, ap))
+                            continue;
+
+                        bool known = false;
+                        for (const Tracked& t : tracked)
+                            if (t.ptr == ap) { known = true; break; }
+                        if (known) continue;
+
+                        LogicalTarget lt;
+                        if (!readLogicalTarget(mem, offsets, ap, lt)) continue;
+                        if (!lt.capsuleOk) continue;
+
+                        Vec3f p{};
+                        int src = 0;
+                        if (!readComponentPos(mem, offsets, ap, p, &src)) continue;
+
+                        uint64_t classPtr = 0;
+                        if (!readPtr(mem, ap + 0x10, classPtr)) continue;
+
+                        Tracked t{};
+                        t.ptr = ap;
+                        t.classPtr = classPtr;
+                        t.compPtr = validatedComponent(mem, offsets, ap);
+                        if (!t.compPtr) continue;
+                        t.ownerOff = discoverOwnerOff(mem, t.compPtr, ap);
+                        if (t.ownerOff && !ownerOk(mem, t.compPtr, ap, t.ownerOff))
+                            continue;
+                        t.capsOk = lt.capsuleOk;
+                        if (namesOk)
                         {
-                            const uint64_t ap = ptrBuf[i];
-                            if (ap < 0x10000) continue;
-
-                            bool known = false;
-                            for (const Tracked& t : tracked)
-                                if (t.ptr == ap) { known = true; break; }
-                            if (known) continue;
-
-                            LogicalTarget lt;
-                            if (!readLogicalTarget(mem, offsets, ap, lt)) continue;
-                            if (!lt.capsuleOk) continue;
-
-                            Vec3f p{};
-                            int src = 0;
-                            if (!readComponentPos(mem, offsets, ap, p, &src)) continue;
-
-                            uint64_t classPtr = 0;
-                            if (!readPtr(mem, ap + 0x10, classPtr)) continue;
-
-                            Tracked t{};
-                            t.ptr = ap;
-                            t.classPtr = classPtr;
-                            t.compPtr = validatedComponent(mem, offsets, ap);
-                            if (!t.compPtr) continue;
-                            t.ownerOff = discoverOwnerOff(mem, t.compPtr, ap);
-                            if (t.ownerOff && !ownerOk(mem, t.compPtr, ap, t.ownerOff))
+                            t.cls = classifyActor(mem, idmap, ap);
+                            t.hasCls = true;
+                            if (t.cls.kind != ClassKind::Dino &&
+                                t.cls.kind != ClassKind::Player)
                                 continue;
-                            t.capsOk = lt.capsuleOk;
-                            if (namesOk)
-                            {
-                                t.cls = classifyActor(mem, idmap, ap);
-                                t.hasCls = true;
-                                if (t.cls.kind != ClassKind::Dino &&
-                                    t.cls.kind != ClassKind::Player)
-                                    continue;
-                            }
-                            absorb(t, p);
-                            t.radius = lt.capsuleRadius;
-                            t.halfHeight = lt.halfHeight;
-                            tracked.push_back(t);
-                            evt("NEW", ap, (int)tracked.size());
                         }
+                        absorb(t, p);
+                        t.radius = lt.capsuleRadius;
+                        t.halfHeight = lt.halfHeight;
+                        tracked.push_back(t);
+                        evt("NEW", ap, (int)tracked.size());
                     }
                     ++rebuilds;
 
@@ -710,56 +716,8 @@ int main(int argc, char** argv)
 
             const int lockedCount = countLocked(tracked);
 
-            // ===========================================================
-            // 2) Own pawn: held while your Player actor stays locked.
-            // ===========================================================
-            {
-                bool present = false;
-                if (ownPawnPtr)
-                {
-                    for (const Tracked& t : tracked)
-                    {
-                        if (t.ptr != ownPawnPtr) continue;
-                        present = (t.state == Tracked::State::Locked && t.havePos);
-                        if (present) ownPawnPos = t.draw;
-                        break;
-                    }
-                }
-                if (!present)
-                {
-                    uint64_t best = 0;
-                    float bestD = kOwnPickCm;
-                    const Vec3f& ref = ocamSafe(lastOverlayCam, haveLastDraw);
-                    for (const Tracked& t : tracked)
-                    {
-                        if (!t.hasCls || t.cls.kind != ClassKind::Player) continue;
-                        if (t.state != Tracked::State::Locked || !t.havePos) continue;
-                        const float d = distanceCm(t.draw, ref);
-                        if (d < bestD) { bestD = d; best = t.ptr; }
-                    }
-                    if (!best && ownPawnPtr)
-                    {
-                        for (const Tracked& t : tracked)
-                        {
-                            if (!t.hasCls || t.cls.kind != ClassKind::Player) continue;
-                            if (t.state != Tracked::State::Locked || !t.havePos) continue;
-                            if (distanceCm(t.draw, ownPawnPos) < kOwnPickCm) { best = t.ptr; break; }
-                        }
-                    }
-                    if (best)
-                    {
-                        ownPawnPtr = best;
-                        for (const Tracked& t : tracked)
-                            if (t.ptr == best && t.havePos) ownPawnPos = t.draw;
-                        evt("OWN", best, 1);
-                    }
-                    else
-                    {
-                        ownPawnPtr = 0;
-                    }
-                }
-            }
-
+            // Anchor for camera.cpp: last known own-pawn position (previous
+            // frame). Stabilizes client selection toward the true player.
             float anchor[3] = { 0.0f, 0.0f, 0.0f };
             const float* anchorPtr = nullptr;
             if (ownPawnPtr)
@@ -771,59 +729,77 @@ int main(int argc, char** argv)
             }
 
             // ===========================================================
-            // 3) Camera: single read + continuity gates (v24 fov tolerance).
+            // 2) Camera: double-read tear check + gates.
             // ===========================================================
-            CameraState csNow;
-            ao::Camera  cand;
-            const bool candOk =
-                readCameraState(mem, roots, offsets, csNow, fbW, fbH, anchorPtr) &&
-                makeOverlayCamera(csNow, cand);
+            CameraState csA, csB;
+            ao::Camera  candA, candB;
+            const bool okA = readCameraState(mem, roots, offsets, csA, fbW, fbH, anchorPtr) &&
+                             makeOverlayCamera(csA, candA);
+            const bool okB = okA &&
+                             readCameraState(mem, roots, offsets, csB, fbW, fbH, anchorPtr) &&
+                             makeOverlayCamera(csB, candB);
+            bool candOk = okA;
+            if (okA && okB)
+            {
+                const float dPos = distanceCm(candA.pos, candB.pos);
+                const float dF   = dot3(candA.forward, candB.forward);
+                const float dU   = dot3(candA.up, candB.up);
+                if (dPos > 5.0f || dF < 0.9995f || dU < 0.9995f ||
+                    candA.fovDegrees != candB.fovDegrees ||
+                    candA.screenW != candB.screenW || candA.screenH != candB.screenH)
+                {
+                    candOk = false;   // genuine tear: hold last good
+                }
+            }
 
             ao::Camera ocam;
             bool ocamOk = false;
 
-            if (candOk && orientSane(cand) && sizeSane(cand, fbW, fbH))
+            if (candOk && orientSane(candA) && sizeSane(candA, fbW, fbH))
             {
-                const float fov = cand.fovDegrees;
+                const float fov = candA.fovDegrees;
                 bool accept = false;
 
                 if (!haveTrusted)
                 {
-                    // v24 bootstrap: must also sit next to a locked actor.
-                    if (fov > 60.0f && fov < 120.0f)
-                    {
-                        for (const Tracked& t : tracked)
-                        {
-                            if (t.state == Tracked::State::Locked && t.havePos &&
-                                distanceCm(cand.pos, t.draw) < 1500.0f)
-                            {
-                                accept = true;
-                                break;
-                            }
-                        }
-                    }
+                    accept = (fov > 60.0f && fov < 120.0f);
                 }
                 else
                 {
-                    const float dTrusted = distanceCm(cand.pos, trustedPos);
+                    const float dTrusted = distanceCm(candA.pos, trustedPos);
                     const float dFov = fabsf(fov - trustedFov);
-                    if (dTrusted < 1500.0f && dFov < kFovContDeg)
+                    if (dTrusted < 500.0f && dFov < 3.0f)
                         accept = true;
                     else if (ownPawnPtr &&
-                             distanceCm(cand.pos, ownPawnPos) < 1500.0f &&
+                             distanceCm(candA.pos, ownPawnPos) < 1500.0f &&
                              dFov < 25.0f)
-                        accept = true;   // teleport / respawn
+                        accept = true;                       // teleport / respawn
+                    else if (dTrusted < 1500.0f && dFov < 3.0f)
+                    {
+                        if (camJumpVotes > 0 &&
+                            distanceCm(camJumpCand, candA.pos) < 200.0f)
+                        {
+                            accept = true;
+                            camJumpVotes = 0;
+                        }
+                        else
+                        {
+                            camJumpCand = candA.pos;
+                            camJumpVotes = 1;
+                        }
+                    }
                 }
 
                 if (accept)
                 {
-                    ocam = cand;
-                    stableCam = csNow;
+                    ocam = candA;
+                    stableCam = csA;
                     haveStable = true;
-                    trustedPos = cand.pos;
-                    trustedFov = cand.fovDegrees;
+                    trustedPos = candA.pos;
+                    trustedFov = candA.fovDegrees;
                     haveTrusted = true;
                     rejectStreak = 0;
+                    camJumpVotes = 0;
                     lastOverlayCam = ocam;
                     haveLastDraw = true;
                     ocamOk = true;
@@ -833,7 +809,7 @@ int main(int argc, char** argv)
             if (!ocamOk)
             {
                 ++rejectStreak;
-                if (rejectStreak > 90)
+                if (rejectStreak > 240)
                 {
                     logInfo("camera re-bootstrap after prolonged rejection");
                     haveTrusted = false;
@@ -852,13 +828,59 @@ int main(int argc, char** argv)
                            (unsigned long long)g_frame, lockedCount, rejectStreak);
                 if (g_dumpFile && g_dumpFramesLeft > 0)
                 {
+                    --g_dumpFramesLeft;
                     fprintf(g_dumpFile, "CAMFAIL f=%llu locked=%d rej=%d cand=%d\n",
                             (unsigned long long)g_frame, lockedCount,
                             rejectStreak, candOk ? 1 : 0);
+                    fflush(g_dumpFile);
                 }
                 ao::overlayHide();
-                std::this_thread::sleep_for(std::chrono::milliseconds(8));
+                std::this_thread::sleep_for(std::chrono::milliseconds(33));
                 continue;
+            }
+
+            // ===========================================================
+            // 3) Own pawn: Player-class locked target within 3 m of the
+            //    trusted camera; hold while within 6 m. (Solo: only your
+            //    pawn qualifies; dormant player pawns are far away.)
+            // ===========================================================
+            {
+                bool keep = false;
+                if (ownPawnPtr)
+                {
+                    for (const Tracked& t : tracked)
+                    {
+                        if (t.ptr != ownPawnPtr) continue;
+                        keep = (t.state == Tracked::State::Locked && t.havePos &&
+                                distanceCm(t.draw, ocam.pos) < 600.0f);
+                        break;
+                    }
+                }
+                if (!keep)
+                {
+                    uint64_t best = 0;
+                    float bestD = 300.0f;
+                    for (const Tracked& t : tracked)
+                    {
+                        if (!t.hasCls || t.cls.kind != ClassKind::Player) continue;
+                        if (t.state != Tracked::State::Locked || !t.havePos) continue;
+                        const float d = distanceCm(t.draw, ocam.pos);
+                        if (d < bestD) { bestD = d; best = t.ptr; }
+                    }
+                    if (best != ownPawnPtr)
+                    {
+                        ownPawnPtr = best;
+                        if (best) evt("OWN", best, (int)bestD);
+                    }
+                }
+                if (ownPawnPtr)
+                {
+                    for (const Tracked& t : tracked)
+                    {
+                        if (t.ptr == ownPawnPtr && t.havePos) ownPawnPos = t.draw;
+                        break;
+                    }
+                }
             }
 
             // ===========================================================
@@ -922,52 +944,42 @@ int main(int argc, char** argv)
             }
 
             // ===========================================================
-            // 5) Debug dump: every 2nd frame, <=16 targets, rare flush.
+            // 5) Debug dump (F9)
             // ===========================================================
             if (g_dumpFile && g_dumpFramesLeft > 0)
             {
                 --g_dumpFramesLeft;
-                if ((g_frame & 1) == 0)
-                {
-                    fprintf(g_dumpFile,
-                        "FRAME %llu fb=%dx%d cam=(%.1f,%.1f,%.1f) fov=%.1f sw=%d sh=%d tracked=%zu drawn=%zu own=%016llX rej=%d\n"
-                        "  F=(%.3f,%.3f,%.3f) R=(%.3f,%.3f,%.3f) U=(%.3f,%.3f,%.3f)\n",
-                        (unsigned long long)g_frame, fbW, fbH,
-                        ocam.pos.x, ocam.pos.y, ocam.pos.z,
-                        ocam.fovDegrees, ocam.screenW, ocam.screenH,
-                        tracked.size(), overlayTargets.size(),
-                        (unsigned long long)ownPawnPtr, rejectStreak,
-                        ocam.forward.x, ocam.forward.y, ocam.forward.z,
-                        ocam.right.x, ocam.right.y, ocam.right.z,
-                        ocam.up.x, ocam.up.y, ocam.up.z);
+                fprintf(g_dumpFile,
+                    "FRAME %llu fb=%dx%d cam=(%.1f,%.1f,%.1f) fov=%.1f sw=%d sh=%d tracked=%zu drawn=%zu own=%016llX rej=%d\n"
+                    "  F=(%.3f,%.3f,%.3f) R=(%.3f,%.3f,%.3f) U=(%.3f,%.3f,%.3f)\n",
+                    (unsigned long long)g_frame, fbW, fbH,
+                    ocam.pos.x, ocam.pos.y, ocam.pos.z,
+                    ocam.fovDegrees, ocam.screenW, ocam.screenH,
+                    tracked.size(), overlayTargets.size(),
+                    (unsigned long long)ownPawnPtr, rejectStreak,
+                    ocam.forward.x, ocam.forward.y, ocam.forward.z,
+                    ocam.right.x, ocam.right.y, ocam.right.z,
+                    ocam.up.x, ocam.up.y, ocam.up.z);
 
-                    int dumped = 0;
-                    for (const Tracked& t : tracked)
-                    {
-                        if (dumped++ >= 16) break;
-                        Vec3f comp{};
-                        int src = 0;
-                        const bool haveComp = readComponentPos(mem, offsets, t.ptr, comp, &src);
-                        fprintf(g_dumpFile,
-                            "  T ptr=%016llX st=%d bl=%d pf=%d caps=%d\n"
-                            "    meas=(%.1f,%.1f,%.1f) draw=(%.1f,%.1f,%.1f)\n"
-                            "    comp=(%.1f,%.1f,%.1f)%s r=%.1f hh=%.1f dist=%.1f\n",
-                            (unsigned long long)t.ptr, (int)t.state, t.blind, t.pinFail,
-                            t.capsOk ? 1 : 0,
-                            t.meas.x, t.meas.y, t.meas.z,
-                            t.draw.x, t.draw.y, t.draw.z,
-                            comp.x, comp.y, comp.z, haveComp ? "" : "(fail)",
-                            t.radius, t.halfHeight,
-                            distanceMeters(ocam.pos, t.draw));
-                    }
-                    if ((g_frame & 15) == 0)
-                        fflush(g_dumpFile);
-                }
-                if (g_dumpFramesLeft == 0)
+                for (const Tracked& t : tracked)
                 {
-                    fflush(g_dumpFile);
-                    logInfo("debug dump finished");
+                    Vec3f comp{};
+                    int src = 0;
+                    const bool haveComp = readComponentPos(mem, offsets, t.ptr, comp, &src);
+                    fprintf(g_dumpFile,
+                        "  T ptr=%016llX st=%d bl=%d pf=%d caps=%d\n"
+                        "    meas=(%.1f,%.1f,%.1f) draw=(%.1f,%.1f,%.1f)\n"
+                        "    comp=(%.1f,%.1f,%.1f)%s r=%.1f hh=%.1f dist=%.1f\n",
+                        (unsigned long long)t.ptr, (int)t.state, t.blind, t.pinFail,
+                        t.capsOk ? 1 : 0,
+                        t.meas.x, t.meas.y, t.meas.z,
+                        t.draw.x, t.draw.y, t.draw.z,
+                        comp.x, comp.y, comp.z, haveComp ? "" : "(fail)",
+                        t.radius, t.halfHeight,
+                        distanceMeters(ocam.pos, t.draw));
                 }
+                fflush(g_dumpFile);
+                if (g_dumpFramesLeft == 0) logInfo("debug dump finished");
             }
 
             // ===========================================================
@@ -989,7 +1001,7 @@ int main(int argc, char** argv)
                        flags.overlayEnabled ? "ON" : "OFF");
             }
 
-            std::this_thread::sleep_for(std::chrono::milliseconds(8));  // ~120 Hz
+            std::this_thread::sleep_for(std::chrono::milliseconds(33));
         } // end inner loop
 
         ao::overlayHide();
