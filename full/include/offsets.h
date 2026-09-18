@@ -31,16 +31,17 @@ struct OffsetProfile
     uint32_t tamedBoolOffset = 0;
     uint32_t backupTamedBoolOffset = 0;
     uint32_t teamIdOffset = 0;
-    // Alternative camera/resolution fallbacks.
     uint32_t altGameInstanceOffset = 0;
     uint32_t altLocalPlayersOffset = 0;
     uint32_t altResolutionDirect = 0;
     uint32_t altResolutionViewportOffset = 0;
     uint32_t altResolutionOffset = 0;
-
-    // --- NEW: version drift gate ---
-    std::wstring expectedPackageVersion; // compared to live package version
-    uint64_t expectedModuleSize = 0;     // 0 = skip size check
+    uint32_t playerControllerOffset = 0;   // ULocalPlayer -> APlayerController
+    uint32_t pawnOffset = 0;               // AController -> APawn
+    uint32_t pcmOffset = 0;                // v30: APlayerController -> APlayerCameraManager
+    uint32_t povOffset = 0;                // v30: PCM -> FMinimalViewInfo (Loc+Rot+FOV, 28 B)
+    std::wstring expectedPackageVersion;
+    uint64_t expectedModuleSize = 0;
 };
 
 OffsetProfile makeDefaultOffsetProfile();
