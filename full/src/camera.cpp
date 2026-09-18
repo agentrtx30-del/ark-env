@@ -108,6 +108,7 @@ static void collect(const WinMemory& mem, const OffsetProfile& off, const char* 
         memcpy(c.m, m, sizeof(m));
         c.resOk = resFor(mem, off, p, c.w, c.h);
         if (!c.resOk) continue;
+        if (c.w < 320 || c.h < 240) continue;   // v22: ignore icon/minimap viewports
         if (g_cands.size() < 12) g_cands.push_back(c);
         out.push_back(c);
     }
@@ -163,7 +164,7 @@ static bool resolveViewportClient(
                 cur.root = "cache"; cur.off = g_routeOffset; cur.sig = 1; cur.p = p;
                 memcpy(cur.m, m, sizeof(m));
                 cur.resOk = resFor(mem, offsets, p, cur.w, cur.h);
-                if (cur.resOk)
+                if (cur.resOk && cur.w >= 320 && cur.h >= 240)
                 {
                     bool switchAway = false;
                     if (anchorValid)
