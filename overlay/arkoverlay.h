@@ -78,8 +78,8 @@ struct Config
     float maxRange = 100000.0f;
     float widthFactor = 1.0f;
     float fontScale = 1.0f;
-    uint32_t playerColor = 0xFFFF5030;
-    uint32_t dinoColor = 0xFF35D04A;
+    uint32_t playerColor = 0xFFFF64C8;
+    uint32_t dinoColor = 0xFFFF2828;
     uint32_t healthBarColor = 0xFF45E045;
     uint32_t turretColor = 0xFFFFC000;
 };

@@ -23,3 +23,8 @@ bool readCameraState(
 void cameraDebugSetVerbose(bool verbose);
 void cameraDebugDumpCandidates();
 void cameraResetRoute();
+void cameraForceNextCandidate();
+void cameraResetCandidateForce();
+int  cameraGetForcedCandidate();
+int  cameraGetCandidateCount();
+bool camFrustumOK(const Vec3f& w, float extraDeg);

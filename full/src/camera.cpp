@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <chrono>
 #include <thread>
+#include <deque>
 
 static bool g_verbose = false;
 void cameraDebugSetVerbose(bool verbose) { g_verbose = verbose; }
@@ -408,15 +409,31 @@ static int g_lockedIdle = 0;
 static float g_lockedMat[16];
 static bool g_lockedMatValid = false;
 
+static float g_accM[16] = {};
+static bool  g_accValid = false;
+static bool  g_accWasValid = false;
+static int   g_accFreeze = 0;
+static CameraState g_accCam{};
+static bool  g_accCamValid = false;
+
+static float   g_vcM[16] = {};
+static bool    g_vcHeld = false;
+static int     g_vcHoldLeft = 0;
+static uint64_t g_vcBase = 0;
+static uint32_t g_vcOff = 0;
+static int     g_vcFail = 0;
+
 void cameraResetRoute()
 {
     g_route = VpRoute::None;
+    g_accValid = false; g_accWasValid = false; g_accFreeze = 0; g_accCamValid = false; g_vcBase = 0; g_vcHeld = false; g_vcHoldLeft = 0;
     g_routeOffset = 0;
     g_switchVotes = 0;
     g_lockedReadFail = 0;
     g_lockedIdle = 0;
     g_lockedMatValid = false;
 }
+
 
 static int routeRootIdx(VpRoute r) { return r == VpRoute::LocalPlayer ? 0 : (r == VpRoute::GameInstance ? 1 : 2); }
 
@@ -429,153 +446,377 @@ static int scoreCandidate(const Candidate& c, const float* anchor, bool anchorVa
                           int fbW, int fbH)
 {
     int s = 0;
+    
+    // v35 elimination: reject impossible FOVs (Main cam is usually 70-110 degrees)
+    const float s0 = sqrtf(c.m[0] * c.m[0] + c.m[1] * c.m[1] + c.m[2] * c.m[2]);
+    float fov = 90.0f;
+    if (s0 > 0.05f && s0 < 64.0f)
+        fov = 2.0f * atanf(1.0f / s0) * 180.0f / kPi;
+    if (fov < 50.0f || fov > 130.0f) return -1000; // Eliminate fake matrices
+
     if (anchorValid && anchorDist(c, anchor) <= kPawnAnchorMaxCm) s += 100;
-    if (c.resOk && c.w >= 320 && c.h >= 240 &&
-        abs(c.w - fbW) < 96 && abs(c.h - fbH) < 96) s += 50;
-    if (yawOnlyMatrix(c.m)) s += 25;
-    if (c.active) s += 50;                 // v34: live groups outrank frozen ones
+    
+    // v35 elimination: Strict Aspect Ratio match (much stronger signal than size proximity)
+    if (c.resOk && c.w >= 320 && c.h >= 240)
+    {
+        float aspectC = (float)c.w / (float)c.h;
+        float aspectW = (float)fbW / (float)fbH;
+        if (fabsf(aspectC - aspectW) < 0.05f) s += 100;
+        else if (abs(c.w - fbW) < 96 && abs(c.h - fbH) < 96) s += 50;
+    }
+    
+    // v35 elimination: yaw-only matrices are typically 2D UI or shadow casters -> penalize them
+    if (yawOnlyMatrix(c.m)) s -= 50;
+    
+    // v35 elimination: DO NOT give a massive bonus for being active.
+    // A stationary main camera must not lose to a moving background camera.
+    if (c.active) s += 5;
+    
     return s;
 }
+
+// === V37-REGISTRY-START ===
+void cameraResetRoute();
+struct CamGroup
+{
+    uint64_t p = 0;
+    int      rootIdx = -1;
+    uint32_t off = 0;
+    int      groupId = 0;
+    float    m[16] = {};
+    float    fov = 90.0f;
+    bool     fovLocked = false;
+    int      w = 0, h = 0;
+    bool     resOk = false;
+    uint64_t lastSeen = 0;
+    int      seen = 0;
+    int      chosen = 0;
+};
+static std::vector<CamGroup> g_groups;
+static int      g_nextGroupId = 1;
+static int      g_forcedGroup = 0;
+static uint64_t g_groupTick  = 0;
+static int      g_lastFbW = 0, g_lastFbH = 0;
+static std::deque<float> g_selFovTrail;
+static uint64_t g_lastDiagWrite = 0;
+
+static float fovFromMatrix(const float m[16])
+{
+    const float s0 = sqrtf(m[0]*m[0] + m[1]*m[1] + m[2]*m[2]);
+    if (s0 > 0.05f && s0 < 64.0f)
+        return 2.0f * atanf(1.0f / s0) * 180.0f / kPi;
+    return 90.0f;
+}
+static CamGroup* findGroup(uint64_t p)
+{
+    for (size_t i = 0; i < g_groups.size(); ++i)
+        if (g_groups[i].p == p) return &g_groups[i];
+    return nullptr;
+}
+static void writeCamDiag(bool force)
+{
+    if (!force && g_groupTick - g_lastDiagWrite < 15) return;
+    g_lastDiagWrite = g_groupTick;
+    FILE* f = nullptr;
+    fopen_s(&f, ".\\work\\camdiag.txt", "w");
+    if (!f) return;
+    fprintf(f, "# camdiag tick=%llu forcedGroupId=G%d window=%dx%d liveGroups=%d\n",
+            (unsigned long long)g_groupTick, g_forcedGroup, g_lastFbW, g_lastFbH,
+            (int)g_groups.size());
+    fprintf(f, "# v39 direct: base=0x%llX off=0x%X fail=%d held=%d\n",
+            (unsigned long long)g_vcBase, g_vcOff, g_vcFail, g_vcHeld ? 1 : 0);
+    fprintf(f, "# id  ptr              root off      res      fov   seen  age  pos                       chosen\n");
+    for (size_t i = 0; i < g_groups.size(); ++i)
+    {
+        const CamGroup& g = g_groups[i];
+        const char* rn = (g.rootIdx==0)?"LP":(g.rootIdx==1?"GI":"ENG");
+        fprintf(f, "G%-3d %016llX %-3s +0x%-6X %4dx%-4d %5.1f %5d %4llu (%.0f,%.0f,%.0f) %5d%s\n",
+                g.groupId, (unsigned long long)g.p, rn, g.off, g.w, g.h, g.fov,
+                g.seen, (unsigned long long)(g_groupTick - g.lastSeen),
+                g.m[12], g.m[13], g.m[14], g.chosen,
+                (g.groupId==g_forcedGroup)?"  <== SELECTED":"");
+    }
+    fprintf(f, "# selected-group raw fov trail (flashing = big jumps):");
+    for (size_t i = 0; i < g_selFovTrail.size(); ++i) fprintf(f, " %.1f", g_selFovTrail[i]);
+    fprintf(f, "\n");
+    fclose(f);
+}
+void cameraForceNextCandidate()
+{
+    int n = (int)g_groups.size();
+    if (n <= 0) return;
+    int pos = -1;
+    for (int i = 0; i < n; ++i) if (g_groups[i].groupId == g_forcedGroup) { pos = i; break; }
+    pos = (pos + 1) % n;
+    g_forcedGroup = g_groups[pos].groupId;
+    cameraResetRoute();
+    printf("[info] Camera selector: group %d/%d (stable id G%d)\n", pos + 1, n, g_forcedGroup);
+}
+void cameraResetCandidateForce()
+{
+    if (g_forcedGroup != 0) printf("[info] Camera selector: reset to auto\n");
+    g_forcedGroup = 0;
+    cameraResetRoute();
+}
+int cameraGetForcedCandidate()
+{
+    for (int i = 0; i < (int)g_groups.size(); ++i)
+        if (g_groups[i].groupId == g_forcedGroup) return i + 1;
+    return 0;
+}
+int cameraGetCandidateCount() { return (int)g_groups.size(); }
+// === V37-REGISTRY-END ===
+
+
+// === V38-START ===
+
+bool camFrustumOK(const Vec3f& w, float extraDeg)
+{
+    if (!g_accCamValid) return true;
+    float dx = w.x - g_accCam.cameraPos.x;
+    float dy = w.y - g_accCam.cameraPos.y;
+    float dz = w.z - g_accCam.cameraPos.z;
+    float L  = sqrtf(dx*dx + dy*dy + dz*dz);
+    if (L < 1.0f) return true;
+    float c = (dx*g_accCam.forward.x + dy*g_accCam.forward.y + dz*g_accCam.forward.z) / L;
+    float half = g_accCam.fovDegrees * 0.5f + extraDeg;
+    if (half > 89.0f) half = 89.0f;
+    return c >= cosf(half * kPi / 180.0f);
+}
+
+static bool orientSaneCam(const float* m)
+{
+    return m[10] > 0.25f && fabsf(m[6]) < 0.50f;   // up.z and right.z
+}
+// === V38-END ===
+
+// === V39-START ===
+
+static bool vcRead(const WinMemory& mem, const OffsetProfile& off, uint64_t base, uint32_t vo,
+                   int fbW, int fbH, const float* anchor, bool anchorValid, Candidate& c)
+{
+    if (!base || !vo) return false;
+    uint64_t p = 0;
+    if (!readPtr(mem, base + vo, p)) return false;
+    float m[16];
+    if (!readMatrixTearSafe(mem, p + off.viewMatrixOffset, m)) return false;
+    c = Candidate{};
+    c.root = "direct"; c.rootIdx = 9; c.off = vo; c.p = p;
+    memcpy(c.m, m, sizeof(m));
+    c.resOk = resFor(mem, off, p, c.w, c.h);
+    if (!c.resOk || c.w < 320 || c.h < 240) return false;
+    if (fabsf((float)c.w / (float)c.h - (float)fbW / (float)fbH) > 0.06f) return false;
+    if (!(m[10] > 0.25f) || fabsf(m[6]) > 0.50f) return false;
+    if (anchorValid)
+    {
+        float d = fabsf(m[12]-anchor[0]) + fabsf(m[13]-anchor[1]) + fabsf(m[14]-anchor[2]);
+        if (d > 2500.0f) return false;
+    }
+    return true;
+}
+
+static bool directVcTick(const WinMemory& mem, const OffsetProfile& off,
+                         uint64_t lp, uint64_t gi, uint64_t eng,
+                         const float* anchor, bool anchorValid, int fbW, int fbH,
+                         Candidate& out)
+{
+    if (g_vcBase)
+    {
+        Candidate c{};
+        if (vcRead(mem, off, g_vcBase, g_vcOff, fbW, fbH, anchor, anchorValid, c))
+        {
+            g_vcFail = 0;
+            memcpy(g_vcM, c.m, sizeof(g_vcM));
+            g_vcHeld = true; g_vcHoldLeft = 45;
+            out = c;
+            return true;
+        }
+        if (++g_vcFail < 45) return false;      // caller holds last good matrix
+        g_vcBase = 0; g_vcFail = 0;             // route died -> re-probe
+    }
+    const uint64_t bases[3] = { lp, gi, eng };
+    const uint32_t vos[4] = { off.viewportClientOffset, 0x1e0u, 0x208u, 0x78u };
+    for (int bi = 0; bi < 3; ++bi)
+        for (int vi = 0; vi < 4; ++vi)
+        {
+            Candidate c{};
+            if (vcRead(mem, off, bases[bi], vos[vi], fbW, fbH, anchor, anchorValid, c))
+            {
+                g_vcBase = bases[bi]; g_vcOff = vos[vi]; g_vcFail = 0;
+                memcpy(g_vcM, c.m, sizeof(g_vcM));
+                g_vcHeld = true; g_vcHoldLeft = 45;
+                printf("[info] v39 direct viewport lock: base%d+0x%X\n", bi, vos[vi]);
+                out = c;
+                return true;
+            }
+        }
+    return false;
+}
+// === V39-END ===
 
 static bool resolveViewportClient(
     const WinMemory& mem, const OffsetProfile& offsets,
     uint64_t localPlayer, uint64_t gameInstance, uint64_t engine,
     const float* anchor, bool anchorValid, int fbW, int fbH, Candidate& out)
 {
+    // ---- v39: deterministic direct viewport-client read (bypasses the scan) ----
+    {
+        Candidate dc{};
+        if (directVcTick(mem, offsets, localPlayer, gameInstance, engine,
+                         anchor, anchorValid, fbW, fbH, dc))
+        {
+            ++g_groupTick;
+            out = dc;
+            writeCamDiag(false);
+            return true;
+        }
+        if (g_vcHeld && g_vcHoldLeft > 0)
+        {
+            --g_vcHoldLeft;
+            Candidate hold{};
+            hold.root = "vchold"; hold.rootIdx = 9; hold.off = g_vcOff; hold.p = 0;
+            memcpy(hold.m, g_vcM, sizeof(hold.m));
+            hold.resOk = true; hold.w = fbW; hold.h = fbH; hold.score = 999;
+            out = hold;
+            writeCamDiag(false);
+            return true;
+        }
+    }
     std::vector<Candidate> cands;
     collect(mem, offsets, "localPlayer", 0, localPlayer, 0x28, 0x4000, cands);
     if (cands.empty())
         collect(mem, offsets, "gameInstance", 1, gameInstance, 0x28, 0x10000, cands);
     if (cands.empty())
         collect(mem, offsets, "engine", 2, engine, 0x28, 0x8000, cands);
-    if (cands.empty())
-    {
-        cameraResetRoute();
-        return false;
-    }
 
+    ++g_groupTick;
+    g_lastFbW = fbW; g_lastFbH = fbH;
+
+    if (cands.empty()) { cameraResetRoute(); writeCamDiag(false); return false; }
+
+    // registry = DIAGNOSTIC ONLY now (selection uses continuity, not pointers)
     for (size_t i = 0; i < cands.size(); ++i)
-        cands[i].score = scoreCandidate(cands[i], anchor, anchorValid, fbW, fbH);
-
-    size_t bestI = 0;
-    for (size_t i = 1; i < cands.size(); ++i)
     {
-        if (cands[i].score > cands[bestI].score) bestI = i;
-        else if (cands[i].score == cands[bestI].score && anchorValid &&
-                 anchorDist(cands[i], anchor) < anchorDist(cands[bestI], anchor)) bestI = i;
+        const Candidate& c = cands[i];
+        CamGroup* g = findGroup(c.p);
+        if (!g)
+        {
+            if (g_groups.size() >= 400) continue;
+            g_groups.push_back(CamGroup());
+            g = &g_groups.back();
+            g->p = c.p; g->groupId = g_nextGroupId++;
+        }
+        g->rootIdx = c.rootIdx; g->off = c.off;
+        memcpy(g->m, c.m, sizeof(g->m));
+        g->resOk = c.resOk; g->w = c.w; g->h = c.h;
+        g->lastSeen = g_groupTick; g->seen++;
+        float f = fovFromMatrix(c.m);
+        if (!g->fovLocked && f > 30.0f && f < 160.0f) { g->fov = f; g->fovLocked = true; }
+        else if (g->fovLocked && fabsf(f - g->fov) <= 15.0f) g->fov = g->fov*0.8f + f*0.2f;
     }
-    Candidate& bestNew = cands[bestI];
-    bool anyActiveRival = false;
-    for (size_t i = 0; i < cands.size(); ++i)
-        if (cands[i].active && (int)i != (int)bestI) anyActiveRival = true;
-    if (bestNew.active) anyActiveRival = true;
+    for (int i = (int)g_groups.size() - 1; i >= 0; --i)
+        if (g_groupTick - g_groups[i].lastSeen > 240)
+            g_groups.erase(g_groups.begin() + i);
 
-    if (g_route != VpRoute::None)
+    // ---- v38 CONTINUITY LOCK ----
+    // 1) TRACK: accept only a candidate that moved smoothly from last accepted matrix.
+    //    Old ring-buffer snapshots jump meters between frames -> rejected here.
+    if (g_accValid)
     {
-        const uint64_t src = routeSource(g_route, localPlayer, gameInstance, engine);
-        uint64_t p = 0;
-        Candidate cur{};
-        bool curOk = false;
-        if (readPtr(mem, src + g_routeOffset, p))
+        int best = -1; float bestCost = 1e30f;
+        for (size_t i = 0; i < cands.size(); ++i)
         {
-            float m[16];
-            if (readMatrixTearSafe(mem, p + offsets.viewMatrixOffset, m))
+            const float* m = cands[i].m;
+            float dt = fabsf(m[12]-g_accM[12]) + fabsf(m[13]-g_accM[13]) + fabsf(m[14]-g_accM[14]);
+            if (dt > 300.0f) continue;                       // >3m in one tick = snapshot, not camera
+            if (anchorValid)
             {
-                cur.root = "cache"; cur.rootIdx = routeRootIdx(g_route);
-                cur.off = g_routeOffset; cur.p = p;
-                memcpy(cur.m, m, sizeof(m));
-                cur.resOk = resFor(mem, offsets, p, cur.w, cur.h);
-                MatHist* h = histGet(cur.rootIdx, cur.off);
-                cur.active = !h->valid || memcmp(h->m, m, sizeof(m)) != 0;
-                if (h) { memcpy(h->m, m, sizeof(m)); h->valid = true; }
-                cur.score = scoreCandidate(cur, anchor, anchorValid, fbW, fbH);
-                g_lockedReadFail = 0;
-                g_lockedIdle = (g_lockedMatValid && memcmp(g_lockedMat, m, sizeof(m)) == 0)
-                               ? g_lockedIdle + 1 : 0;
-                memcpy(g_lockedMat, m, sizeof(m));
-                g_lockedMatValid = true;
-                curOk = true;
+                float da = fabsf(m[12]-anchor[0]) + fabsf(m[13]-anchor[1]) + fabsf(m[14]-anchor[2]);
+                if (da > 2500.0f) continue;                  // locked onto stale snapshot -> drop
             }
+            float d0 = m[0]*g_accM[0]+m[1]*g_accM[1]+m[2]*g_accM[2];
+            float d1 = m[4]*g_accM[4]+m[5]*g_accM[5]+m[6]*g_accM[6];
+            float d2 = m[8]*g_accM[8]+m[9]*g_accM[9]+m[10]*g_accM[10];
+            float md = d0 < d1 ? d0 : d1; if (d2 < md) md = d2;
+            if (md < 0.985f) continue;                       // rotation snapped = not our camera
+            float cost = dt + 300.0f*(1.0f-md);
+            if (cost < bestCost) { bestCost = cost; best = (int)i; }
         }
-        if (!curOk)
+        if (best >= 0)
         {
-            // v34: torn/failed read of the lock => reuse last-good matrix for up
-            // to 30 ticks instead of falling through and re-locking randomly.
-            ++g_lockedReadFail;
-            if (g_lockedReadFail <= 30 && g_lockedMatValid)
-            {
-                cur.root = "cache"; cur.rootIdx = routeRootIdx(g_route);
-                cur.off = g_routeOffset; cur.p = p;
-                memcpy(cur.m, g_lockedMat, sizeof(cur.m));
-                cur.resOk = true; cur.w = fbW; cur.h = fbH;
-                cur.active = false;
-                cur.score = scoreCandidate(cur, anchor, anchorValid, fbW, fbH);
-                curOk = true;
-            }
-        }
-
-        if (curOk)
-        {
-            const bool dead = (g_lockedIdle > 300 && anyActiveRival);  // elimination
-            const bool healthy = !dead &&
-                ((cur.score >= 100) || (!anchorValid && cur.score >= 25));
-            if (healthy)
-            {
-                if (bestNew.score > cur.score + 50)
-                {
-                    if (++g_switchVotes >= 30) { g_switchVotes = 0; /* adopt bestNew */ }
-                    else { out = cur; return true; }
-                }
-                else { g_switchVotes = 0; out = cur; return true; }
-            }
-            else
-            {
-                if (++g_switchVotes >= 10) { g_switchVotes = 0; /* adopt bestNew */ }
-                else { out = cur; return true; }
-            }
-        }
-        else if (g_lockedMatValid && g_lockedReadFail <= 30)
-        {
-            Candidate stale{};
-            stale.root = "cache"; stale.rootIdx = routeRootIdx(g_route);
-            stale.off = g_routeOffset;
-            memcpy(stale.m, g_lockedMat, sizeof(stale.m));
-            stale.resOk = true; stale.w = fbW; stale.h = fbH; stale.active = false;
-            stale.score = scoreCandidate(stale, anchor, anchorValid, fbW, fbH);
-            out = stale;
+            memcpy(g_accM, cands[best].m, sizeof(g_accM));
+            g_accFreeze = 0;
+            out = cands[best];
+            writeCamDiag(false);
             return true;
         }
-        else
+        // 2) FREEZE-HOLD: keep last good matrix instead of flipping to a snapshot
+        if (g_accFreeze < 120)
         {
-            if (++g_switchVotes >= 10) { g_switchVotes = 0; /* adopt bestNew */ }
-            else if (g_lockedMatValid)
+            ++g_accFreeze;
+            Candidate hold{};
+            hold.root = "hold"; hold.rootIdx = -1; hold.off = 0; hold.p = 0;
+            memcpy(hold.m, g_accM, sizeof(hold.m));
+            hold.resOk = true; hold.w = fbW; hold.h = fbH;
+            hold.score = 999; hold.active = false;
+            out = hold;
+            writeCamDiag(false);
+            return true;
+        }
+        g_accValid = false;   // blind too long -> reacquire below
+    }
+
+    // 3) ACQUIRE
+    {
+        int best = -1; float bestD = 1e30f;
+        // 3a) anchor known: candidate glued to your own pawn (<=9m), sane orientation
+        if (anchorValid)
+        {
+            for (size_t i = 0; i < cands.size(); ++i)
             {
-                Candidate stale{};
-                stale.root = "cache"; stale.rootIdx = routeRootIdx(g_route);
-                stale.off = g_routeOffset;
-                memcpy(stale.m, g_lockedMat, sizeof(stale.m));
-                stale.resOk = true; stale.w = fbW; stale.h = fbH; stale.active = false;
-                stale.score = scoreCandidate(stale, anchor, anchorValid, fbW, fbH);
-                out = stale;
-                return true;
+                const float* m = cands[i].m;
+                if (!orientSaneCam(m)) continue;
+                float d = fabsf(m[12]-anchor[0]) + fabsf(m[13]-anchor[1]) + fabsf(m[14]-anchor[2]);
+                if (d > 900.0f) continue;
+                if (d < bestD) { bestD = d; best = (int)i; }
             }
+        }
+        // 3b) BOOTSTRAP (own pawn not known yet -> no anchor): scored pick,
+        //     same behaviour as the old auto mode, so startup can lock at all.
+        if (best < 0)
+        {
+            int bestScore = 49;
+            for (size_t i = 0; i < cands.size(); ++i)
+            {
+                if (!orientSaneCam(cands[i].m)) continue;
+                if (!cands[i].resOk) continue;
+                int sc = scoreCandidate(cands[i], anchor, anchorValid, fbW, fbH);
+                if (sc > bestScore) { bestScore = sc; best = (int)i; }
+            }
+        }
+        if (best >= 0)
+        {
+            memcpy(g_accM, cands[best].m, sizeof(g_accM));
+            g_accValid = true; g_accWasValid = true; g_accFreeze = 0;
+            out = cands[best];
+            writeCamDiag(false);
+            return true;
         }
     }
 
-    g_route = strcmp(bestNew.root, "localPlayer") == 0 ? VpRoute::LocalPlayer :
-              strcmp(bestNew.root, "gameInstance") == 0 ? VpRoute::GameInstance :
-              VpRoute::Engine;
-    g_routeOffset = bestNew.off;
-    g_switchVotes = 0;
-    g_lockedReadFail = 0;
-    g_lockedIdle = 0;
-    memcpy(g_lockedMat, bestNew.m, sizeof(g_lockedMat));
-    g_lockedMatValid = true;
-    if (g_verbose)
-        printf("    LOCKED viewportClient at %s+0x%X score=%d active=%d\n",
-               bestNew.root, bestNew.off, bestNew.score, bestNew.active ? 1 : 0);
-    out = bestNew;
-    return true;
+    // 4) last resort: hold previous matrix briefly so overlay never flips to garbage
+    if (g_accWasValid && g_accFreeze < 600)
+    {
+        ++g_accFreeze;
+        Candidate hold{};
+        hold.root = "hold"; memcpy(hold.m, g_accM, sizeof(hold.m));
+        hold.resOk = true; hold.w = fbW; hold.h = fbH; hold.score = 999;
+        out = hold;
+        writeCamDiag(false);
+        return true;
+    }
+    writeCamDiag(false);
+    return false;
 }
 
 static bool tryChain(
@@ -618,6 +859,7 @@ static bool tryChain(
         out.fovDegrees = 2.0f * atanf(1.0f / s0) * 180.0f / kPi;
     else
         out.fovDegrees = 90.0f;
+    g_accCam = out; g_accCamValid = true;
     return true;
 }
 

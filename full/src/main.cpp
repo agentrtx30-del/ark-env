@@ -11,6 +11,13 @@
 #include "selfcheck.h"
 #include "nametable.h"
 #include "classifier.h"
+
+// Forward declarations for manual matrix selector (v36)
+void cameraForceNextCandidate();
+void cameraResetCandidateForce();
+int  cameraGetForcedCandidate();
+int  cameraGetCandidateCount();
+
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -690,6 +697,14 @@ int main(int argc, char** argv)
             }
             if (GetAsyncKeyState(VK_F10) & 1)
                 writeSendMe("F10");
+            if (GetAsyncKeyState(VK_F11) & 1)
+            {
+                cameraForceNextCandidate();
+            }
+            if (GetAsyncKeyState(VK_F12) & 1)
+            {
+                cameraResetCandidateForce();
+            }
             if (GetAsyncKeyState('L') & 1)
             {
                 logInfo("L pressed - exiting");
@@ -942,6 +957,11 @@ int main(int argc, char** argv)
                     if (!(r > 15.0f && r < 500.0f))   r = isPlayer ? 40.0f : 60.0f;
                     if (!(hh > 30.0f && hh < 600.0f)) hh = isPlayer ? 90.0f : 120.0f;
 
+                                        // v38: cull targets behind / outside the live camera frustum
+                    if (!camFrustumOK(t.draw, 10.0f)) continue;
+
+                    // v40 draw filter: players ALWAYS; creatures only level > 130
+                    if (!isPlayer && !(t.level > 130)) continue;
                     ao::Target at{};
                     at.worldPos = t.draw;
                     at.boxW = r * 2.0f;
@@ -1027,10 +1047,16 @@ int main(int argc, char** argv)
                 rateMark = now;
                 rateFrames = 0;
 
+                int cIdx = cameraGetForcedCandidate();
+                int cCnt = cameraGetCandidateCount();
+                char camStr[32];
+                if (cIdx < 0) sprintf_s(camStr, "auto/%d", cCnt);
+                else sprintf_s(camStr, "F%d/%d", cIdx + 1, cCnt);
+
                 char sb[320];
                 sprintf_s(sb,
                     "[status] frame=%llu hz=%.0f tracked=%zu locked=%d drawn=%zu "
-                    "names=%d fov=%.1f frz=%d own=%d overlay=%s",
+                    "names=%d fov=%.1f frz=%d own=%d cam=%s overlay=%s",
                     (unsigned long long)g_frame,
                     measHz,
                     tracked.size(),
@@ -1040,6 +1066,7 @@ int main(int argc, char** argv)
                     trustedFov,
                     freezeStreak,
                     ownPawnPtr ? 1 : 0,
+                    camStr,
                     flags.overlayEnabled ? "ON" : "OFF");
                 printf("%s\n", sb);
                 g_statusLines.push_back(sb);
