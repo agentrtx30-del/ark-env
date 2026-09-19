@@ -50,19 +50,17 @@ static int matrixSignature(const float m[16])
     return 0;
 }
 
+// FIX 1: Removed strict memcmp requirement. A rotating/moving camera updates its matrix,
+// causing back-to-back reads to differ. We now rely purely on matrixSignature 
+// to validate that the read memory is a legitimate view matrix.
 static bool readMatrixTearSafe(const WinMemory& mem, uint64_t addr, float out[16])
 {
-    float a[16], b[16];
-    for (int attempt = 0; attempt < 4; ++attempt)
+    float a[16];
+    if (!mem.readBytes(addr, a, sizeof(a))) return false;
+    if (matrixSignature(a) == 1)
     {
-        if (!mem.readBytes(addr, a, sizeof(a))) return false;
-        if (!mem.readBytes(addr, b, sizeof(b))) return false;
-        if (memcmp(a, b, sizeof(a)) == 0)
-        {
-            if (matrixSignature(a) != 1) return false;
-            memcpy(out, a, sizeof(a));
-            return true;
-        }
+        memcpy(out, a, sizeof(a));
+        return true;
     }
     return false;
 }
@@ -84,25 +82,18 @@ struct PovInfo
     float fov;
 };
 
+// FIX 2: Same fix as matrix reads. Don't reject moving POVs.
 static bool readPovTearSafe(const WinMemory& mem, uint64_t addr, PovInfo& out)
 {
-    unsigned char a[28], b[28];
-    for (int attempt = 0; attempt < 4; ++attempt)
-    {
-        if (!mem.readBytes(addr, a, sizeof(a))) return false;
-        if (!mem.readBytes(addr, b, sizeof(b))) return false;
-        if (memcmp(a, b, sizeof(a)) == 0)
-        {
-            memcpy(&out.loc, a, 12);
-            memcpy(&out.rot, a + 12, 12);
-            memcpy(&out.fov, a + 24, 4);
-            return std::isfinite(out.loc.x) && std::isfinite(out.loc.y) && std::isfinite(out.loc.z) &&
-                   std::isfinite(out.rot.x) && std::isfinite(out.rot.y) && std::isfinite(out.rot.z) &&
-                   out.fov > 5.0f && out.fov < 170.0f &&
-                   out.rot.x > -89.9f && out.rot.x < 89.9f;
-        }
-    }
-    return false;
+    unsigned char a[28];
+    if (!mem.readBytes(addr, a, sizeof(a))) return false;
+    memcpy(&out.loc, a, 12);
+    memcpy(&out.rot, a + 12, 12);
+    memcpy(&out.fov, a + 24, 4);
+    return std::isfinite(out.loc.x) && std::isfinite(out.loc.y) && std::isfinite(out.loc.z) &&
+           std::isfinite(out.rot.x) && std::isfinite(out.rot.y) && std::isfinite(out.rot.z) &&
+           out.fov > 5.0f && out.fov < 170.0f &&
+           out.rot.x > -89.9f && out.rot.x < 89.9f;
 }
 
 static bool povPlausible(const PovInfo& p)
@@ -289,7 +280,7 @@ bool runFindCamera(const WinMemory& mem, const RuntimeRoots& roots, OffsetProfil
     off.povOffset = povOff;
 
     FILE* f = nullptr;
-    fopen_s(&f, ".\\work\\findcam.json", "w");
+    fopen_s(&f, ".workfindcam.json", "w");
     if (f)
     {
         fprintf(f, "{ \"playerControllerOffset\": \"0x%X\", \"pcmOffset\": \"0x%X\", \"povOffset\": \"0x%X\" }\n",
@@ -425,7 +416,10 @@ static bool g_lockedMatValid = false;
 static float g_accM[16] = {};
 static bool  g_accValid = false;
 static bool  g_accWasValid = false;
-static int   g_accFreeze = 0; g_staleRun = 0; g_lastGoodPos[0]=g_accM[12]; g_lastGoodPos[1]=g_accM[13]; g_lastGoodPos[2]=g_accM[14]; g_lastGoodPosValid = true;
+static int   g_accFreeze = 0; 
+static int   g_staleRun = 0; 
+static float g_lastGoodPos[3]={0,0,0}; 
+static bool  g_lastGoodPosValid = false;
 static CameraState g_accCam{};
 static bool  g_accCamValid = false;
 
@@ -446,7 +440,6 @@ void cameraResetRoute()
     g_lockedIdle = 0;
     g_lockedMatValid = false;
 }
-
 
 static int routeRootIdx(VpRoute r) { return r == VpRoute::LocalPlayer ? 0 : (r == VpRoute::GameInstance ? 1 : 2); }
 
@@ -531,7 +524,7 @@ static void writeCamDiag(bool force)
     if (!force && g_groupTick - g_lastDiagWrite < 15) return;
     g_lastDiagWrite = g_groupTick;
     FILE* f = nullptr;
-    fopen_s(&f, ".\\work\\camdiag.txt", "w");
+    fopen_s(&f, ".workcamdiag.txt", "w");
     if (!f) return;
     fprintf(f, "# camdiag tick=%llu forcedGroupId=G%d window=%dx%d liveGroups=%d\n",
             (unsigned long long)g_groupTick, g_forcedGroup, g_lastFbW, g_lastFbH,
@@ -579,7 +572,6 @@ int cameraGetForcedCandidate()
 }
 int cameraGetCandidateCount() { return (int)g_groups.size(); }
 // === V37-REGISTRY-END ===
-
 
 // === V38-START ===
 
@@ -706,8 +698,9 @@ static bool  g_lastGoodPosValid = false;
     const float tScale = dtMs / 16.7f;              // 1.0 at 60 Hz
     float maxStep = 300.0f * tScale;                 // cm allowed between ticks
     if (maxStep > 3000.0f) maxStep = 3000.0f;
-    float allowDeg = 12.0f * tScale;                 // deg of rotation allowed per tick
-    if (allowDeg > 75.0f) allowDeg = 75.0f;
+    // FIX 3: Increased rotation tolerance from 12 to 85 degrees per frame to allow fast mouse flicks
+    float allowDeg = 85.0f * tScale;                 // deg of rotation allowed per tick (increased for fast mouse turns)
+    if (allowDeg > 179.0f) allowDeg = 179.0f;
     const float minDot = cosf(allowDeg * kPi / 180.0f);
     const bool accFar = anchorValid &&
         (fabsf(g_accM[12]-anchor[0]) + fabsf(g_accM[13]-anchor[1]) + fabsf(g_accM[14]-anchor[2]) > 2500.0f);
@@ -877,17 +870,24 @@ static bool  g_lastGoodPosValid = false;
                 }
             }
         }
-        // 3b) BOOTSTRAP (own pawn not known yet -> no anchor): scored pick,
-        //     same behaviour as the old auto mode, so startup can lock at all.
-        if (best < 0 && !g_accWasValid)   // v43: un-gated pick ONLY for the first lock ever
+        // FIX 4: BOOTSTRAP / REACQUIRE logic fixed. Removed the !g_accWasValid gate and added
+        // a strong positional bonus for candidates near the last known good position to prevent
+        // the reacquire from hopping to a distant snapshot.
+        if (best < 0)
         {
-            int bestScore = 49;
+            int bestScore = -1000;
             for (size_t i = 0; i < cands.size(); ++i)
             {
                 if (!orientSaneCam(cands[i].m)) continue;
                 if (!v42FovOk(cands[i].m)) continue;
                 if (!cands[i].resOk) continue;
                 int sc = scoreCandidate(cands[i], anchor, anchorValid, fbW, fbH);
+                if (g_lastGoodPosValid)
+                {
+                    float dg = fabsf(cands[i].m[12]-g_lastGoodPos[0]) + fabsf(cands[i].m[13]-g_lastGoodPos[1]) + fabsf(cands[i].m[14]-g_lastGoodPos[2]);
+                    if (dg < 5000.0f) sc += 200;
+                    else if (dg < 15000.0f) sc += 50;
+                }
                 if (sc > bestScore) { bestScore = sc; best = (int)i; }
             }
         }
@@ -975,7 +975,7 @@ static bool nameContains(const WinMemory& mem, uint64_t obj, const wchar_t* sub)
 
 static bool calibLoad(OffsetProfile& off)
 {
-    FILE* f = nullptr; fopen_s(&f, ".\\work\\calib.txt", "r");
+    FILE* f = nullptr; fopen_s(&f, ".workcalib.txt", "r");
     if (!f) return false;
     unsigned a=0,b=0,c=0;
     int ok = (fscanf(f, "pc=0x%X pcm=0x%X pov=0x%X", &a, &b, &c) == 3);
@@ -986,7 +986,7 @@ static bool calibLoad(OffsetProfile& off)
 }
 static void calibSave(const OffsetProfile& off)
 {
-    FILE* f = nullptr; fopen_s(&f, ".\\work\\calib.txt", "w");
+    FILE* f = nullptr; fopen_s(&f, ".workcalib.txt", "w");
     if (!f) return;
     fprintf(f, "pc=0x%X pcm=0x%X pov=0x%X\n",
             off.playerControllerOffset, off.pcmOffset, off.povOffset);
