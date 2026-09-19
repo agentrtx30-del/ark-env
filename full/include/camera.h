@@ -28,3 +28,6 @@ void cameraResetCandidateForce();
 int  cameraGetForcedCandidate();
 int  cameraGetCandidateCount();
 bool camFrustumOK(const Vec3f& w, float extraDeg);
+
+void cameraBindIdmap(const std::unordered_map<uint64_t,std::wstring>* m);
+void cameraEnsureCalib(const WinMemory& mem, const RuntimeRoots& roots, OffsetProfile& off);

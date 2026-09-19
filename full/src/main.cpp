@@ -17,6 +17,8 @@ void cameraForceNextCandidate();
 void cameraResetCandidateForce();
 int  cameraGetForcedCandidate();
 int  cameraGetCandidateCount();
+void cameraBindIdmap(const std::unordered_map<uint64_t,std::wstring>* m);
+void cameraEnsureCalib(const WinMemory& mem, const RuntimeRoots& roots, OffsetProfile& off);
 
 #include <cstdio>
 #include <cstdlib>
@@ -611,6 +613,8 @@ int main(int argc, char** argv)
             break;
         }
 
+        cameraBindIdmap(&idmap);
+        cameraEnsureCalib(mem, roots, offsets);
         if (flags.selfCheck)
         {
             runSelfCheck(mem, roots, offsets, 32, &idmap);
@@ -1038,6 +1042,8 @@ int main(int argc, char** argv)
                 if (g_dumpFramesLeft == 0) logInfo("debug dump finished");
             }
 
+            if (g_frame % 120 == 0)
+                cameraEnsureCalib(mem, roots, offsets);   // retry POV calib until it sticks
             // 5) Status
             if (g_frame % 60 == 0)
             {

@@ -373,6 +373,18 @@ static MatHist* histGet(int rootIdx, uint32_t off)
     return h;
 }
 
+// === V42-START ===
+// FOV BAN: only scale-1 rigid view matrices (fov ~90.0 / 90.9) are allowed.
+// Zoomed / projection-like snapshots (58.9, 48.1, 80.x, 106-148) are rejected.
+static bool v42FovOk(const float m[16])
+{
+    const float s0 = sqrtf(m[0]*m[0] + m[1]*m[1] + m[2]*m[2]);
+    if (!(s0 > 0.05f && s0 < 64.0f)) return false;
+    const float fov = 2.0f * atanf(1.0f / s0) * 180.0f / kPi;
+    return fabsf(fov - 90.0f) <= 2.0f;   // accepts 88.0..92.0 = 90.0 & 90.9 + tear jitter
+}
+// === V42-END ===
+
 static void collect(const WinMemory& mem, const OffsetProfile& off, const char* root,
                     int rootIdx, uint64_t base, uint32_t lo, uint32_t hi, std::vector<Candidate>& out)
 {
@@ -382,6 +394,7 @@ static void collect(const WinMemory& mem, const OffsetProfile& off, const char* 
         if (!readPtr(mem, base + o, p)) continue;
         float m[16];
         if (!readMatrixTearSafe(mem, p + off.viewMatrixOffset, m)) continue;
+        if (!v42FovOk(m)) continue;
         Candidate c{};
         c.root = root; c.rootIdx = rootIdx; c.off = o; c.p = p;
         memcpy(c.m, m, sizeof(m));
@@ -600,6 +613,7 @@ static bool vcRead(const WinMemory& mem, const OffsetProfile& off, uint64_t base
     if (!readPtr(mem, base + vo, p)) return false;
     float m[16];
     if (!readMatrixTearSafe(mem, p + off.viewMatrixOffset, m)) return false;
+    if (!v42FovOk(m)) return false;
     c = Candidate{};
     c.root = "direct"; c.rootIdx = 9; c.off = vo; c.p = p;
     memcpy(c.m, m, sizeof(m));
@@ -728,11 +742,12 @@ static bool resolveViewportClient(
         {
             const float* m = cands[i].m;
             float dt = fabsf(m[12]-g_accM[12]) + fabsf(m[13]-g_accM[13]) + fabsf(m[14]-g_accM[14]);
-            if (dt > 300.0f) continue;                       // >3m in one tick = snapshot, not camera
+            if (dt > 300.0f) continue;
+            if (!v42FovOk(m)) continue;                       // >3m in one tick = snapshot, not camera
             if (anchorValid)
             {
                 float da = fabsf(m[12]-anchor[0]) + fabsf(m[13]-anchor[1]) + fabsf(m[14]-anchor[2]);
-                if (da > 2500.0f) continue;                  // locked onto stale snapshot -> drop
+                if (da > 1500.0f) continue;                  // locked onto stale snapshot -> drop
             }
             float d0 = m[0]*g_accM[0]+m[1]*g_accM[1]+m[2]*g_accM[2];
             float d1 = m[4]*g_accM[4]+m[5]*g_accM[5]+m[6]*g_accM[6];
@@ -776,6 +791,7 @@ static bool resolveViewportClient(
             {
                 const float* m = cands[i].m;
                 if (!orientSaneCam(m)) continue;
+                if (!v42FovOk(m)) continue;
                 float d = fabsf(m[12]-anchor[0]) + fabsf(m[13]-anchor[1]) + fabsf(m[14]-anchor[2]);
                 if (d > 900.0f) continue;
                 if (d < bestD) { bestD = d; best = (int)i; }
@@ -789,6 +805,7 @@ static bool resolveViewportClient(
             for (size_t i = 0; i < cands.size(); ++i)
             {
                 if (!orientSaneCam(cands[i].m)) continue;
+                if (!v42FovOk(cands[i].m)) continue;
                 if (!cands[i].resOk) continue;
                 int sc = scoreCandidate(cands[i], anchor, anchorValid, fbW, fbH);
                 if (sc > bestScore) { bestScore = sc; best = (int)i; }
@@ -862,6 +879,100 @@ static bool tryChain(
     g_accCam = out; g_accCamValid = true;
     return true;
 }
+
+// === V41-START ===
+static const std::unordered_map<uint64_t,std::wstring>* g_idmapPtr = nullptr;
+void cameraBindIdmap(const std::unordered_map<uint64_t,std::wstring>* m){ g_idmapPtr = m; }
+
+static bool nameContains(const WinMemory& mem, uint64_t obj, const wchar_t* sub)
+{
+    if (!g_idmapPtr) return false;
+    std::wstring n;
+    if (!readObjectName(mem, *g_idmapPtr, obj, n)) return false;
+    return n.find(sub) != std::wstring::npos;
+}
+
+static bool calibLoad(OffsetProfile& off)
+{
+    FILE* f = nullptr; fopen_s(&f, ".\\work\\calib.txt", "r");
+    if (!f) return false;
+    unsigned a=0,b=0,c=0;
+    int ok = (fscanf(f, "pc=0x%X pcm=0x%X pov=0x%X", &a, &b, &c) == 3);
+    fclose(f);
+    if (!ok || !a || !b || !c) return false;
+    off.playerControllerOffset = a; off.pcmOffset = b; off.povOffset = c;
+    return true;
+}
+static void calibSave(const OffsetProfile& off)
+{
+    FILE* f = nullptr; fopen_s(&f, ".\\work\\calib.txt", "w");
+    if (!f) return;
+    fprintf(f, "pc=0x%X pcm=0x%X pov=0x%X\n",
+            off.playerControllerOffset, off.pcmOffset, off.povOffset);
+    fclose(f);
+}
+
+void cameraEnsureCalib(const WinMemory& mem, const RuntimeRoots& roots, OffsetProfile& off)
+{
+    if (off.pcmOffset && off.povOffset && off.playerControllerOffset) return;
+    if (calibLoad(off))
+    {
+        printf("[info] calib loaded: pc=+0x%X pcm=+0x%X pov=+0x%X\n",
+               off.playerControllerOffset, off.pcmOffset, off.povOffset);
+        return;
+    }
+    uint64_t eng = 0;
+    if (!readPtr(mem, roots.engineGlobalAddress, eng)) { printf("[warn] calib: no engine\n"); return; }
+    const uint32_t giO[2] = { off.gameInstanceOffset, off.altGameInstanceOffset };
+    const uint32_t lpO[2] = { off.localPlayersOffset, off.altLocalPlayersOffset };
+    uint64_t lp = 0;
+    for (int i = 0; i < 2 && !lp; ++i)
+    {
+        if (!giO[i]) continue;
+        uint64_t gi = 0; if (!readPtr(mem, eng + giO[i], gi)) continue;
+        for (int j = 0; j < 2 && !lp; ++j)
+        {
+            if (!lpO[j]) continue;
+            uint64_t arr = 0; if (!readPtr(mem, gi + lpO[j], arr)) continue;
+            int32_t cnt = 0; if (!mem.read(arr + 8, cnt) || cnt <= 0 || cnt > 4) continue;
+            uint64_t d = 0; if (!readPtr(mem, arr, d)) continue;
+            uint64_t p = 0; if (!readPtr(mem, d, p)) continue;
+            if (p) lp = p;
+        }
+    }
+    if (!lp) { printf("[warn] calib: no local player\n"); return; }
+
+    for (uint32_t pcOff = 0x20; pcOff <= 0x400; pcOff += 8)
+    {
+        uint64_t pc = 0; if (!readPtr(mem, lp + pcOff, pc)) continue;
+        if (!nameContains(mem, pc, L"PlayerController")) continue;
+        for (uint32_t pcmOff = 0x100; pcmOff <= 0xC00; pcmOff += 8)
+        {
+            uint64_t pcm = 0; if (!readPtr(mem, pc + pcmOff, pcm)) continue;
+            if (!nameContains(mem, pcm, L"CameraManager")) continue;
+            for (uint32_t po = 0x0; po <= 0x4000; po += 4)
+            {
+                PovInfo p1{}, p2{}, p3{};
+                if (!readPovTearSafe(mem, pcm + po, p1) || !povPlausible(p1)) continue;
+                if (p1.fov < 50.0f || p1.fov > 120.0f) continue;
+                Sleep(40);
+                if (!readPovTearSafe(mem, pcm + po, p2) || !povPlausible(p2)) continue;
+                Sleep(40);
+                if (!readPovTearSafe(mem, pcm + po, p3) || !povPlausible(p3)) continue;
+                float d12 = fabsf(p1.loc.x-p2.loc.x)+fabsf(p1.loc.y-p2.loc.y)+fabsf(p1.loc.z-p2.loc.z);
+                float d23 = fabsf(p2.loc.x-p3.loc.x)+fabsf(p2.loc.y-p3.loc.y)+fabsf(p2.loc.z-p3.loc.z);
+                if (d12 > 200.0f || d23 > 200.0f) continue;
+                if (fabsf(p1.fov-p2.fov) > 2.0f || fabsf(p2.fov-p3.fov) > 2.0f) continue;
+                off.playerControllerOffset = pcOff; off.pcmOffset = pcmOff; off.povOffset = po;
+                calibSave(off);
+                printf("[info] calib OK: pc=+0x%X pcm=+0x%X pov=+0x%X (fov %.1f)\n", pcOff, pcmOff, po, p1.fov);
+                return;
+            }
+        }
+    }
+    printf("[warn] calib failed - staying on matrix scan\n");
+}
+// === V41-END ===
 
 bool readCameraState(
     const WinMemory& mem, const RuntimeRoots& roots, const OffsetProfile& offsets,
