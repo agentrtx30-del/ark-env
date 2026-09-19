@@ -425,7 +425,7 @@ static bool g_lockedMatValid = false;
 static float g_accM[16] = {};
 static bool  g_accValid = false;
 static bool  g_accWasValid = false;
-static int   g_accFreeze = 0;
+static int   g_accFreeze = 0; g_staleRun = 0; g_lastGoodPos[0]=g_accM[12]; g_lastGoodPos[1]=g_accM[13]; g_lastGoodPos[2]=g_accM[14]; g_lastGoodPosValid = true;
 static CameraState g_accCam{};
 static bool  g_accCamValid = false;
 
@@ -673,6 +673,45 @@ static bool resolveViewportClient(
     uint64_t localPlayer, uint64_t gameInstance, uint64_t engine,
     const float* anchor, bool anchorValid, int fbW, int fbH, Candidate& out)
 {
+static int   g_staleRun = 0;
+static float g_lastGoodPos[3] = {0,0,0};
+static bool  g_lastGoodPosValid = false;
+    // === V43-START === anchor debounce / sticky anchor ===
+    static float  g_anchorUsed[3] = {0,0,0};
+    static uint64_t g_anchorUsedTick = 0;
+    if (anchorValid)
+    {
+        float a0 = anchor[0], a1 = anchor[1], a2 = anchor[2];
+        if (g_anchorUsedTick && g_groupTick - g_anchorUsedTick <= 60)
+        {
+            float dj = fabsf(a0-g_anchorUsed[0]) + fabsf(a1-g_anchorUsed[1]) + fabsf(a2-g_anchorUsed[2]);
+            if (dj > 5000.0f) { a0 = g_anchorUsed[0]; a1 = g_anchorUsed[1]; a2 = g_anchorUsed[2]; }  // own-pawn flip -> ignore jump
+        }
+        g_anchorUsed[0]=a0; g_anchorUsed[1]=a1; g_anchorUsed[2]=a2; g_anchorUsedTick = g_groupTick;
+        anchor = g_anchorUsed;   // params are assignable; rest of function uses debounced anchor
+    }
+    else if (g_anchorUsedTick && g_groupTick - g_anchorUsedTick <= 240)
+    {
+        anchor = g_anchorUsed;   // player momentarily missing -> keep last known pawn for ~4s
+        anchorValid = true;
+    }
+    // === V43-END ===
+    // === v45: speed-aware continuity gates ===
+    static auto g_prevT = std::chrono::steady_clock::now();
+    const auto g_nowT = std::chrono::steady_clock::now();
+    float dtMs = std::chrono::duration<float, std::milli>(g_nowT - g_prevT).count();
+    g_prevT = g_nowT;
+    if (dtMs < 1.0f) dtMs = 1.0f;
+    if (dtMs > 250.0f) dtMs = 250.0f;
+    const float tScale = dtMs / 16.7f;              // 1.0 at 60 Hz
+    float maxStep = 300.0f * tScale;                 // cm allowed between ticks
+    if (maxStep > 3000.0f) maxStep = 3000.0f;
+    float allowDeg = 12.0f * tScale;                 // deg of rotation allowed per tick
+    if (allowDeg > 75.0f) allowDeg = 75.0f;
+    const float minDot = cosf(allowDeg * kPi / 180.0f);
+    const bool accFar = anchorValid &&
+        (fabsf(g_accM[12]-anchor[0]) + fabsf(g_accM[13]-anchor[1]) + fabsf(g_accM[14]-anchor[2]) > 2500.0f);
+    // === end v45 ===
     // ---- v39: deterministic direct viewport-client read (bypasses the scan) ----
     {
         Candidate dc{};
@@ -691,6 +730,7 @@ static bool resolveViewportClient(
             hold.root = "vchold"; hold.rootIdx = 9; hold.off = g_vcOff; hold.p = 0;
             memcpy(hold.m, g_vcM, sizeof(hold.m));
             hold.resOk = true; hold.w = fbW; hold.h = fbH; hold.score = 999;
+            if (++g_staleRun > 40) { writeCamDiag(false); return false; }
             out = hold;
             writeCamDiag(false);
             return true;
@@ -706,7 +746,25 @@ static bool resolveViewportClient(
     ++g_groupTick;
     g_lastFbW = fbW; g_lastFbH = fbH;
 
-    if (cands.empty()) { cameraResetRoute(); writeCamDiag(false); return false; }
+    if (cands.empty())
+    {
+        // v44: an empty scan must NOT destroy the lock - hold last good matrix.
+        if (g_accWasValid && g_accFreeze < 20 && !accFar)
+        {
+            ++g_accFreeze;
+            Candidate hold{};
+            hold.root = "hold"; hold.rootIdx = -1; hold.off = 0; hold.p = 0;
+            memcpy(hold.m, g_accM, sizeof(hold.m));
+            hold.resOk = true; hold.w = fbW; hold.h = fbH;
+            hold.score = 999; hold.active = false;
+            if (++g_staleRun > 40) { writeCamDiag(false); return false; }
+            out = hold;
+            writeCamDiag(false);
+            return true;
+        }
+        writeCamDiag(false);
+        return false;
+    }
 
     // registry = DIAGNOSTIC ONLY now (selection uses continuity, not pointers)
     for (size_t i = 0; i < cands.size(); ++i)
@@ -742,31 +800,31 @@ static bool resolveViewportClient(
         {
             const float* m = cands[i].m;
             float dt = fabsf(m[12]-g_accM[12]) + fabsf(m[13]-g_accM[13]) + fabsf(m[14]-g_accM[14]);
-            if (dt > 300.0f) continue;
+            if (dt > maxStep) continue;
             if (!v42FovOk(m)) continue;                       // >3m in one tick = snapshot, not camera
             if (anchorValid)
             {
                 float da = fabsf(m[12]-anchor[0]) + fabsf(m[13]-anchor[1]) + fabsf(m[14]-anchor[2]);
-                if (da > 1500.0f) continue;                  // locked onto stale snapshot -> drop
+                if (da > 1000.0f) continue;                  // locked onto stale snapshot -> drop
             }
             float d0 = m[0]*g_accM[0]+m[1]*g_accM[1]+m[2]*g_accM[2];
             float d1 = m[4]*g_accM[4]+m[5]*g_accM[5]+m[6]*g_accM[6];
             float d2 = m[8]*g_accM[8]+m[9]*g_accM[9]+m[10]*g_accM[10];
             float md = d0 < d1 ? d0 : d1; if (d2 < md) md = d2;
-            if (md < 0.985f) continue;                       // rotation snapped = not our camera
+            if (md < minDot) continue;                       // rotation snapped = not our camera
             float cost = dt + 300.0f*(1.0f-md);
             if (cost < bestCost) { bestCost = cost; best = (int)i; }
         }
         if (best >= 0)
         {
             memcpy(g_accM, cands[best].m, sizeof(g_accM));
-            g_accFreeze = 0;
+            g_accFreeze = 0; g_staleRun = 0; g_lastGoodPos[0]=g_accM[12]; g_lastGoodPos[1]=g_accM[13]; g_lastGoodPos[2]=g_accM[14]; g_lastGoodPosValid = true;
             out = cands[best];
             writeCamDiag(false);
             return true;
         }
         // 2) FREEZE-HOLD: keep last good matrix instead of flipping to a snapshot
-        if (g_accFreeze < 120)
+        if (g_accFreeze < 20 && !accFar)
         {
             ++g_accFreeze;
             Candidate hold{};
@@ -774,6 +832,7 @@ static bool resolveViewportClient(
             memcpy(hold.m, g_accM, sizeof(hold.m));
             hold.resOk = true; hold.w = fbW; hold.h = fbH;
             hold.score = 999; hold.active = false;
+            if (++g_staleRun > 40) { writeCamDiag(false); return false; }
             out = hold;
             writeCamDiag(false);
             return true;
@@ -787,19 +846,40 @@ static bool resolveViewportClient(
         // 3a) anchor known: candidate glued to your own pawn (<=9m), sane orientation
         if (anchorValid)
         {
-            for (size_t i = 0; i < cands.size(); ++i)
+            // v44: two passes - first try to return to the cluster we already
+            // held (kills the hop between neighbouring 90-degree clusters),
+            // fall back to nearest-to-pawn only if that cluster is gone.
+            for (int pass = 0; pass < 3 && best < 0; ++pass)
             {
-                const float* m = cands[i].m;
-                if (!orientSaneCam(m)) continue;
-                if (!v42FovOk(m)) continue;
-                float d = fabsf(m[12]-anchor[0]) + fabsf(m[13]-anchor[1]) + fabsf(m[14]-anchor[2]);
-                if (d > 900.0f) continue;
-                if (d < bestD) { bestD = d; best = (int)i; }
+                const bool useLastGood = (pass == 0) && g_lastGoodPosValid;
+                const bool useLast = (pass == 1) && g_accWasValid;
+                bestD = 1e30f;
+                for (size_t i = 0; i < cands.size(); ++i)
+                {
+                    const float* m = cands[i].m;
+                    if (!orientSaneCam(m)) continue;
+                    if (!v42FovOk(m)) continue;
+                    float d = fabsf(m[12]-anchor[0]) + fabsf(m[13]-anchor[1]) + fabsf(m[14]-anchor[2]);
+                    if (d > 900.0f) continue;
+                    if (useLastGood)
+                    {
+                        float dg = fabsf(m[12]-g_lastGoodPos[0]) + fabsf(m[13]-g_lastGoodPos[1]) + fabsf(m[14]-g_lastGoodPos[2]);
+                        if (dg > 8000.0f) continue;
+                        if (dg < bestD) { bestD = dg; best = (int)i; }
+                    }
+                    else if (useLast)
+                    {
+                        float dl = fabsf(m[12]-g_accM[12]) + fabsf(m[13]-g_accM[13]) + fabsf(m[14]-g_accM[14]);
+                        if (dl > 2500.0f) continue;
+                        if (dl < bestD) { bestD = dl; best = (int)i; }
+                    }
+                    else if (d < bestD) { bestD = d; best = (int)i; }
+                }
             }
         }
         // 3b) BOOTSTRAP (own pawn not known yet -> no anchor): scored pick,
         //     same behaviour as the old auto mode, so startup can lock at all.
-        if (best < 0)
+        if (best < 0 && !g_accWasValid)   // v43: un-gated pick ONLY for the first lock ever
         {
             int bestScore = 49;
             for (size_t i = 0; i < cands.size(); ++i)
@@ -814,7 +894,7 @@ static bool resolveViewportClient(
         if (best >= 0)
         {
             memcpy(g_accM, cands[best].m, sizeof(g_accM));
-            g_accValid = true; g_accWasValid = true; g_accFreeze = 0;
+            g_accValid = true; g_accWasValid = true; g_accFreeze = 0; g_staleRun = 0; g_lastGoodPos[0]=g_accM[12]; g_lastGoodPos[1]=g_accM[13]; g_lastGoodPos[2]=g_accM[14]; g_lastGoodPosValid = true;
             out = cands[best];
             writeCamDiag(false);
             return true;
@@ -822,12 +902,13 @@ static bool resolveViewportClient(
     }
 
     // 4) last resort: hold previous matrix briefly so overlay never flips to garbage
-    if (g_accWasValid && g_accFreeze < 600)
+    if (g_accWasValid && g_accFreeze < 40 && !accFar)
     {
         ++g_accFreeze;
         Candidate hold{};
         hold.root = "hold"; memcpy(hold.m, g_accM, sizeof(hold.m));
         hold.resOk = true; hold.w = fbW; hold.h = fbH; hold.score = 999;
+        if (++g_staleRun > 40) { writeCamDiag(false); return false; }
         out = hold;
         writeCamDiag(false);
         return true;
@@ -912,8 +993,10 @@ static void calibSave(const OffsetProfile& off)
     fclose(f);
 }
 
+static int g_calibLpFails = 0;   // v43 file-scope calib fail counter
 void cameraEnsureCalib(const WinMemory& mem, const RuntimeRoots& roots, OffsetProfile& off)
 {
+    if (g_calibLpFails > 6) return;   // v43: give up quietly, stop log spam
     if (off.pcmOffset && off.povOffset && off.playerControllerOffset) return;
     if (calibLoad(off))
     {
@@ -940,7 +1023,12 @@ void cameraEnsureCalib(const WinMemory& mem, const RuntimeRoots& roots, OffsetPr
             if (p) lp = p;
         }
     }
-    if (!lp) { printf("[warn] calib: no local player\n"); return; }
+    if (!lp)
+    {
+        if (++g_calibLpFails <= 3) printf("[warn] calib: no local player (fail %d)\n", g_calibLpFails);
+        return;
+    }
+    g_calibLpFails = 0;
 
     for (uint32_t pcOff = 0x20; pcOff <= 0x400; pcOff += 8)
     {
